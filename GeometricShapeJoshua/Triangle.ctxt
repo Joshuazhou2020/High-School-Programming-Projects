@@ -1,0 +1,47 @@
+#BlueJ class context
+comment0.params=name\ m\ n\ p
+comment0.target=Triangle(java.lang.String,\ double,\ double,\ double)
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Triangle.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @param\ \ \ name\ \ \ \ name\ of\ the\ triangle,\ probably\ vertices\n\ @param\ \ \ m\ \ \ \ \ \ \ one\ of\ the\ side\ lengths\ of\ the\ triangle\n\ @param\ \ \ n\ \ \ \ \ \ \ another\ of\ the\ side\ lengths\ of\ the\ triangle\n\ @param\ \ \ p\ \ \ \ \ \ \ last\ of\ the\ side\ lengths\ of\ the\ triangle\n
+comment1.params=
+comment1.target=double\ getSideA()
+comment1.text=\n\ Returns\ the\ length\ of\ the\ longest\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @return\ \ the\ length\ of\ the\ longest\ side\n
+comment10.params=obj
+comment10.target=boolean\ equals(java.lang.Object)
+comment10.text=\n\ Checks\ if\ all\ sides\ of\ the\ object\ and\ the\ triangle\ are\ nearly\ equal.\n\ \n\ @param\ \ \ obj\ \ \ \ \ an\ object\ to\ be\ compared\ to\ the\ triangle\n\ \n\ @return\ \ true\ \ \ \ if\ the\ object\ and\ the\ triangle\ are\ equal;\ otherwise,\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ false\n
+comment11.params=obj
+comment11.target=int\ compareTo(java.lang.Object)
+comment11.text=\n\ Compares\ current\ triangle\ with\ the\ Object\ obj.\n\ \n\ @param\ \ \ obj\ Triangle\ object\ with\ which\ to\ compare\n\ \n\ @return\ \ 0\ \ \ if\ the\ two\ triangles\ have\ the\ same\ side\ length.\n\ \ \ \ \ \ \ \ >\ 0\ \ \ determined\ by\ comparing\ the\ two\ longest\ sides;\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ equal,\ compare\ medium-length\ sides;\ and\ if\ equal,\ \n\ \ \ \ \ \ \ \ \ \ \ \ \ \ compare\ the\ shortest\ side\ until\ current\ triangle\ has\ a\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ longer\ length\ than\ obj's\ comparable\ length\n\ \ \ \ \ \ \ \ <\ 0\ \ \ determined\ by\ comparing\ the\ twolongest\ sides.\ if\ equal,\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ compare\ medium-length\ sides\ and\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ equal,\ compare\ the\ shorter\ length\ than\ the\ obj's\ comparable\ length,\n\ \ \ \ \ \ \ -999\ \ \ if\ obj\ is\ not\ a\ Triangle\n
+comment12.params=
+comment12.target=boolean\ isRegular()
+comment12.text=\n\ Checks\ if\ the\ three\ sides\ of\ a\ triangle\ are\ nearly\ equal.\n\ \n\ @return\ \ true\ \ \ \ if\ the\ triangle\ is\ regular;\ otherwise,\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ false\n
+comment13.params=
+comment13.target=int\ numSides()
+comment13.text=\n\ Gets\ the\ number\ of\ sides\ of\ a\ triangle.\n\ \n\ @return\ \ the\ number\ of\ sides\n
+comment14.params=
+comment14.target=java.lang.String\ toString()
+comment14.text=\n\ Formats\ the\ trangle's\ class\ name,\ the\ object's\ name,\ and\ its\ perimeter\ and\ area.\n\ \n\ @return\ \ a\ formatted\ line\ about\ the\ geometric\ object\n
+comment2.params=
+comment2.target=double\ getSideB()
+comment2.text=\n\ Returns\ the\ length\ of\ the\ middle\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @return\ \ the\ length\ of\ the\ middle\ side\n
+comment3.params=
+comment3.target=double\ getSideC()
+comment3.text=\n\ Returns\ the\ length\ of\ the\ shortest\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=sideC\n\ \n\ @return\ \ the\ length\ of\ the\ shortest\ side\n
+comment4.params=
+comment4.target=double\ getPerimeter()
+comment4.text=\n\ Gets\ the\ perimeter\ of\ the\ triangle.\n\ \n\ @return\ \ the\ sum\ of\ the\ side\ lengths\n
+comment5.params=
+comment5.target=double\ getArea()
+comment5.text=\n\ Gets\ the\ area\ of\ the\ triangle.\n\ \n\ @return\ \ the\ area\ of\ the\ triangle\n
+comment6.params=anotherA
+comment6.target=void\ setSideA(double)
+comment6.text=\n\ Sets\ the\ length\ of\ the\ longest\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @param\ \ \ anotherA\ \ \ \ the\ length\ of\ the\ modified\ sideA\n
+comment7.params=anotherB
+comment7.target=void\ setSideB(double)
+comment7.text=\n\ Sets\ the\ length\ of\ the\ second\ to\ longest\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @param\ \ \ anotherB\ \ \ \ the\ length\ of\ the\ modified\ sideB\n
+comment8.params=anotherC
+comment8.target=void\ setSideC(double)
+comment8.text=\n\ Sets\ the\ length\ of\ the\ shortest\ side.\n\ \n\ @postcondition\ \ \ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @param\ \ \ anotherC\ \ \ \ the\ length\ of\ the\ modified\ sideC\n
+comment9.params=a\ b\ c
+comment9.target=void\ orderSides(double,\ double,\ double)
+comment9.text=\n\ Order\ the\ side\ lengths\ so\ that\ sideA\ >\=\ sideB\ >\=\ sideC\n\ \n\ @param\ \ \ a\ \ \ one\ of\ the\ side\ lengths\ of\ the\ triangle\n\ @param\ \ \ b\ \ \ another\ of\ the\ side\ lengths\ of\ the\ triangle\n\ @param\ \ \ c\ \ \ last\ of\ the\ side\ lengths\ of\ the\ triangle\n\ \n\ @throws\ \ IllegalArgumentException\ if\ sides\ do\ not\ make\ a\ valid\ triangle\n
+numComments=15

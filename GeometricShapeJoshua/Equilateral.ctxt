@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=name\ leg
+comment0.target=Equilateral(java.lang.String,\ double)
+comment0.text=\n\ Constructs\ an\ object\ of\ the\ Equilateral\ class.\n\ \n\ @param\ \ \ name\ \ \ \ the\ name\ of\ the\ Equilateral\n\ @param\ \ \ leg\ \ \ \ \ the\ length\ of\ the\ leg\n
+comment1.params=leg
+comment1.target=void\ setSideA(double)
+comment1.text=\n\ Sets\ the\ length\ of\ one\ leg.\n\ \n\ @param\ \ \ leg\ \ \ \ \ the\ length\ of\ the\ leg\n
+comment2.params=leg
+comment2.target=void\ setSideB(double)
+comment2.text=\n\ Sets\ the\ length\ of\ another\ leg.\n\ \n\ @param\ \ \ leg\ \ \ \ \ the\ length\ of\ the\ leg\n
+comment3.params=leg
+comment3.target=void\ setSideC(double)
+comment3.text=\n\ Sets\ the\ length\ of\ the\ last\ leg.\n\ \n\ @param\ \ \ leg\ \ \ \ \ the\ length\ of\ the\ leg\n
+numComments=4

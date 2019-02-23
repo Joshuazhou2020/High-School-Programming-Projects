@@ -1,0 +1,51 @@
+Class documentation
+<---- javadoc command: ---->
+/Applications/BlueJ.app/Contents/JDK/Home/bin/javadoc
+-author
+-version
+-nodeprecated
+-tag
+precondition:a:Precondition:
+-tag
+postcondition:a:Postcondition:
+-tag
+param
+-tag
+return
+-package
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+/Applications/BlueJ.app/Contents/Resources/Java/bluejcore.jar:/Applications/BlueJ.app/Contents/Resources/Java/junit-4.8.2.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-core.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/gridworld.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-gpio-extension.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-service.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/KarelJRobot.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-device.jar:/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua
+-d
+/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-docletpath
+/Applications/BlueJ.app/Contents/Resources/Java/bjdoclet.jar
+-doclet
+bluej.doclet.doclets.formats.html.HtmlDoclet
+/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/Circle.java
+<---- end of javadoc command ---->
+Loading source file /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/Circle.java...
+Constructing Javadoc information...
+Standard Doclet version 1.8.0_66
+Building tree for all the packages and classes...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/Circle.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/package-frame.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/package-summary.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/constant-values.html...
+Building index for all the packages and classes...
+Building index for all classes...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/allclasses-frame.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/allclasses-noframe.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/index.html...
+Generating /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/GeometricShapeJoshua/doc/stylesheet.css...
+Note: Custom tags that could override future standard tags:  @precondition, @postcondition. To avoid potential overrides, use at least one period character (.) in custom tag names.
+Note: Custom tags that were not seen:  @precondition, @postcondition

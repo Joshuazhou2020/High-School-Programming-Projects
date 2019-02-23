@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Tetris()
+comment0.text=\n\ Constructs\ an\ object\ in\ the\ Tetris\ class.\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\n\ Creates\ a\ new\ Tetris\ board.\n\ \n\ @param\ \ \ args\ \ \ \ arguments\ from\ the\ command\ line\n
+comment2.params=
+comment2.target=void\ upPressed()
+comment2.text=\n\ \n
+comment3.params=
+comment3.target=void\ downPressed()
+comment3.text=\n\ \n
+comment4.params=
+comment4.target=void\ leftPressed()
+comment4.text=\n\ \n
+comment5.params=
+comment5.target=void\ rightPressed()
+comment5.text=\n\ \n
+comment6.params=
+comment6.target=void\ spacePressed()
+comment6.text=\n\ \n
+numComments=7

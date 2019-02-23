@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=grid
+comment0.target=Tetrad(MyBoundedGrid)
+comment0.text=\n\ Constructs\ an\ object\ in\ the\ Tetrad\ class.\n\ \n\ @param\ \ \ grid\ \ \ \ the\ grid\ in\ which\ the\ object\ is\ to\ be\ added\n
+comment1.params=grid\ locs
+comment1.target=void\ addToLocations(MyBoundedGrid,\ Location[])
+comment1.text=\n\ Adds\ blocks\ to\ specific\ locations.\n\ \n\ @param\ \ \ grid\ \ \ \ the\ grid\ in\ which\ the\ blocks\ are\ to\ be\ added\n\ @param\ \ \ locs\ \ \ \ the\ locations\ at\ which\ the\ blocks\ are\ to\ be\ added\n
+comment2.params=
+comment2.target=Location[]\ removeBlocks()
+comment2.text=\n\ \n
+comment3.params=grid\ locs
+comment3.target=boolean\ areEmpty(MyBoundedGrid,\ Location[])
+comment3.text=\n\ \n
+comment4.params=deltaRow\ deltaCol
+comment4.target=boolean\ translate(int,\ int)
+comment4.text=\n\ \n
+numComments=5
