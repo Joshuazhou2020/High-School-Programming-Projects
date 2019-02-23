@@ -1,0 +1,40 @@
+Class documentation
+<---- javadoc command: ---->
+/Applications/BlueJ.app/Contents/JDK/Home/bin/javadoc
+-author
+-version
+-nodeprecated
+-tag
+precondition:a:Precondition:
+-tag
+postcondition:a:Postcondition:
+-tag
+param
+-tag
+return
+-package
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.8
+-classpath
+/Applications/BlueJ.app/Contents/Resources/Java/bluejcore.jar:/Applications/BlueJ.app/Contents/Resources/Java/junit-4.8.2.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-core.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/gridworld.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-gpio-extension.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-service.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/KarelJRobot.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-device.jar:/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/Peppers
+-d
+/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/Peppers/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-docletpath
+/Applications/BlueJ.app/Contents/Resources/Java/bjdoclet.jar
+-doclet
+bluej.doclet.doclets.formats.html.HtmlDoclet
+/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/Peppers/Sorter.java
+<---- end of javadoc command ---->
+Loading source file /GridWorldCaseStudy/GridWorldCodeBlueJ/projects/Peppers/Sorter.java...
+/GridWorldCaseStudy/GridWorldCodeBlueJ/projects/Peppers/Sorter.java:17: error: ';' expected
+        nums=new int[10]
+                        ^
+1 error

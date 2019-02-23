@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Test2DArrayListOfStringsSkeleton()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Test2D\n
+comment1.params=fileName
+comment1.target=void\ readWordListInto2DArrayList(java.lang.String)
+comment1.text=\n\ Create\ an\ ArrayList\ of\ ArrayList\ of\ Strings.\n\ Add\ words\ to\ an\ ArrayList\ based\ upon\ the\ number\ of\ letters\ in\ each\ word.\ \ For\n\ example,\ if\ a\ word\ has\ three\ letters,\ add\ it\ to\ dict.get(3).\n\ \n\ @param\ fileName\ \ the\ name\ of\ the\ file\n\ @throws\ IOException\ file\ is\ not\ found\n
+comment2.params=dictionary
+comment2.target=void\ printPortionOfArrayList(java.util.List)
+comment2.text=\n\ Print\ out\ just\ a\ portion\ of\ the\ dictionary.\n\ \n\ @param\ dictionary\ \ a\ 2-D\ ArrayList\ of\ words\n
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+comment3.text=\n\ Test\ the\ methods.\n\ \n\ @param\ \ args\ \ information\ from\ the\ command\ line\n\ @throws\ IOException\ file\ is\ not\ found\n
+numComments=4

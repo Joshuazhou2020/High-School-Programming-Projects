@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SuperExperiment()
+comment1.params=
+comment1.target=double\ getZ()
+comment2.params=zzTop
+comment2.target=void\ setZ(int)
+comment3.params=
+comment3.target=java.lang.String\ toString()
+comment4.params=obj
+comment4.target=boolean\ equals(java.lang.Object)
+comment5.params=obj
+comment5.target=int\ compareTo(java.lang.Object)
+numComments=6
