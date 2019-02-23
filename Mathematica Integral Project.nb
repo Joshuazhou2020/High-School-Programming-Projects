@@ -1,0 +1,3437 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[    127403,       3436]
+NotebookOptionsPosition[    109262,       3029]
+NotebookOutlinePosition[    109670,       3046]
+CellTagsIndexPosition[    109627,       3043]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ StyleBox["Mathematica Integral Project\n", "Chapter",
+  FontWeight->"Bold"],
+ "Joshua Zhou, P5"
+}], "Text",
+ CellChangeTimes->{{3.754331501439967*^9, 3.754331525385509*^9}, {
+   3.754331555619109*^9, 3.754331578273573*^9}, 
+   3.756336800614099*^9},ExpressionUUID->"235cb46d-ac0c-45df-90bb-\
+7bd6aec3ba9a"],
+
+Cell[CellGroupData[{
+
+Cell["Goal", "Section",
+ CellChangeTimes->{{3.7558099113748493`*^9, 
+  3.755809911772591*^9}},ExpressionUUID->"ad5ff509-5bc2-42fd-9fe9-\
+086ab584109a"],
+
+Cell["Find the following integral:", "Text",
+ CellChangeTimes->{{3.755810701185061*^9, 
+  3.755810704812142*^9}},ExpressionUUID->"1220fc4e-2ee4-460c-810a-\
+336c2c0c8a6b"],
+
+Cell[BoxData[
+ RowBox[{
+  SubsuperscriptBox["\[Integral]", "0", 
+   FractionBox[
+    SqrtBox["\[Pi]"], "2"]], 
+  RowBox[{"tan", 
+   RowBox[{"(", 
+    SuperscriptBox["x", "2"], ")"}]}]}]], "Text",
+ CellChangeTimes->{{3.755810740934531*^9, 3.755810796204517*^9}, {
+  3.7558108310336037`*^9, 
+  3.755810847270041*^9}},ExpressionUUID->"cadeb883-2c90-4bd2-a883-\
+74824ff1ca41"],
+
+Cell["The exact value of this integral to 3 decimal places is: ", "Text",
+ CellChangeTimes->{{3.7561337979783573`*^9, 3.7561339344098988`*^9}, 
+   3.7563319517916203`*^9, {3.756332009075675*^9, 
+   3.756332017298332*^9}},ExpressionUUID->"ba7dfd23-90e3-449f-bdc6-\
+465f70453995"],
+
+Cell[BoxData[
+ RowBox[{"integral", "=", 
+  RowBox[{"N", "[", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{"Tan", "[", 
+       SuperscriptBox["x", "2"], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", 
+        FractionBox[
+         SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.756331954353342*^9, 3.756331998174478*^9}, {
+  3.7563367833968887`*^9, 
+  3.7563367905856133`*^9}},ExpressionUUID->"39debece-bc53-4834-8cd7-\
+fc8c4ac6b719"],
+
+Cell["\<\
+In this project, we will use different strategies to approximate this value.\
+\>", "Text",
+ CellChangeTimes->{
+  3.756332011695366*^9},ExpressionUUID->"873e98d6-eccd-4910-bf4e-\
+32cb8e8fff79"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Part 1", "Section",
+ CellChangeTimes->{{3.755809817716934*^9, 
+  3.755809830091394*^9}},ExpressionUUID->"223156c7-041f-4011-8d20-\
+076ad1efa74d"],
+
+Cell["\<\
+In this part, we will approximate the solution using rectangles. By dividing \
+the graph into rectangles, we can estimate its area by adding up the areas of \
+the rectangles. As the widths of these rectangles decrease, the estimate \
+becomes more accurate.
+We will utilize a right-hand Riemann Sum for this problem. With a RHRS, after \
+we split the area into rectangles, the height of each rectangle is determined \
+by plugging the x-value of the right corner of each rectangle into the \
+function. The basic form of a RHRS is:\
+\>", "Text",
+ CellChangeTimes->{{3.755812528200815*^9, 3.755812545379795*^9}, {
+   3.755812862110162*^9, 3.755812931227128*^9}, 3.7558129732148943`*^9, {
+   3.756082570399941*^9, 3.756082571815691*^9}, {3.7560827540552473`*^9, 
+   3.756082795766276*^9}, {3.756083869202443*^9, 3.7560839814770403`*^9}, {
+   3.7560840254366083`*^9, 3.7560840600801897`*^9}, {3.756133963163599*^9, 
+   3.7561339634192867`*^9}, {3.756150798555263*^9, 3.7561508064732113`*^9}, {
+   3.756150841813136*^9, 3.756150857020832*^9}, {3.756334741761775*^9, 
+   3.756334892845848*^9}, {3.75633492584932*^9, 3.756334975613348*^9}, {
+   3.756335913217306*^9, 3.7563359779102077`*^9}, {3.75633604785597*^9, 
+   3.756336185296135*^9}, {3.7563980124000196`*^9, 
+   3.756398037689074*^9}},ExpressionUUID->"a94bc694-2d53-4aea-aa34-\
+21a629f1f961"],
+
+Cell[BoxData[
+ RowBox[{
+  UnderoverscriptBox["\[Sum]", 
+   RowBox[{"k", "=", "1"}], "n"], 
+  RowBox[{"[", 
+   RowBox[{"f", 
+    RowBox[{"(", 
+     SubscriptBox["x", "k"], ")"}], "*", "\[CapitalDelta]x"}], 
+   "]"}]}]], "Text",
+ CellChangeTimes->{
+  3.7558109668150873`*^9, 3.755811421320703*^9, {3.756359594947686*^9, 
+   3.7563595989469357`*^9}},ExpressionUUID->"5f34d0a6-a860-401b-80f4-\
+9b7a15eeebb5"],
+
+Cell[TextData[{
+ "n is the number of rectangles, k is the k-",
+ StyleBox["th",
+  IgnoreSpellCheck->True],
+ " rectangle, and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", 
+     RowBox[{"(", "x", ")"}]}], "=", 
+    RowBox[{"tan", "(", 
+     SuperscriptBox["x", "2"], ")"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "c18614aa-1090-4f56-887b-5c15d87c3f7e"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.756336096223209*^9, 3.756336098277587*^9}, {
+  3.75633621733657*^9, 
+  3.75633624259684*^9}},ExpressionUUID->"bd2227a0-af0e-40cd-b5ec-\
+3b37e4b7c5e7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], "=", 
+   RowBox[{"Tan", "[", 
+    SuperscriptBox["x", "2"], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.75608257605486*^9, 3.756082605727067*^9}, 
+   3.7560828171395082`*^9, {3.756162619003016*^9, 3.7561626236639977`*^9}, 
+   3.756162655663475*^9},ExpressionUUID->"cf7928f9-6173-42f0-8091-\
+7d54a0d8458a"],
+
+Cell["To visualize the problem, here is a graph of the function:", "Text",
+ CellChangeTimes->{{3.756337925887581*^9, 
+  3.756337934156468*^9}},ExpressionUUID->"65ce7f90-53a6-4d55-bbc1-\
+74c96964c080"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Tan", "[", 
+    SuperscriptBox["x", "2"], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", 
+     FractionBox[
+      SqrtBox["\[Pi]"], "2"]}], "}"}], ",", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7558361898543167`*^9, 3.755836270087915*^9}, {
+  3.7558364057996273`*^9, 
+  3.755836465038538*^9}},ExpressionUUID->"6bc1bcc3-9289-4e16-9d79-\
+61100a34f1bf"],
+
+Cell["\<\
+\[CapitalDelta]x represents the width of each rectangle. We know the initial \
+and final values of x (which we can use to find the length between the two \
+endpoints), and we have a variable for the number of rectangles. For this \
+problem, all the rectangles will have the same width.\
+\>", "Text",
+ CellChangeTimes->{{3.7558114767845697`*^9, 3.755811595067555*^9}, {
+   3.75581163765336*^9, 3.7558116896180563`*^9}, {3.755813015575911*^9, 
+   3.755813019408383*^9}, {3.756335317589673*^9, 3.7563353456338387`*^9}, {
+   3.7563354008505583`*^9, 3.756335446160898*^9}, 3.756335489315889*^9, {
+   3.7563356305911427`*^9, 
+   3.756335694890594*^9}},ExpressionUUID->"f2ae615f-f403-4c35-b6b3-\
+ed5226859be1"],
+
+Cell[BoxData[
+ RowBox[{"\[CapitalDelta]x", "=", 
+  RowBox[{
+   FractionBox[
+    RowBox[{
+     SubscriptBox["x", "f"], "-", 
+     SubscriptBox["x", "i"]}], "n"], "=", 
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      FractionBox[
+       SqrtBox["\[Pi]"], "2"], "-", "0"}], "n"], "=", 
+    FractionBox[
+     SqrtBox["\[Pi]"], 
+     RowBox[{"2", "*", "n"}]]}]}]}]], "Text",
+ CellChangeTimes->{{3.75581182678692*^9, 3.755811882538129*^9}, {
+   3.7558119126389847`*^9, 3.755811948083788*^9}, {3.755813024099572*^9, 
+   3.7558130364104156`*^9}, 
+   3.755961110934499*^9},ExpressionUUID->"d55afdb1-3d99-4051-accd-\
+1fa45ab5cc76"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[CapitalDelta]x", "1"], "=", 
+   FractionBox[
+    SqrtBox["\[Pi]"], 
+    RowBox[{"2", "*", "n"}]]}], ";"}]], "Input",
+ CellChangeTimes->{{3.756082500356989*^9, 3.75608254667587*^9}, 
+   3.7560826626805487`*^9},ExpressionUUID->"a42260f4-4405-41fa-9c4e-\
+b09f73df9ea6"],
+
+Cell[TextData[{
+ "To find ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", 
+    SubscriptBox["x", "k"], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6d86fdfb-b00e-4fd7-b749-52c3e0a5e9d5"],
+ ", we need to find an equation for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "41da595d-c120-45e8-9eff-11d9694dcddb"],
+ ". Since we are solving for a RHRS, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "k"], " "}], TraditionalForm]],ExpressionUUID->
+  "a5b8eaf9-9c52-4490-bab0-e2a3180df7dc"],
+ "is the x-value of the right corner of the k",
+ StyleBox["-t",
+  IgnoreSpellCheck->True],
+ "h rectangle. In other words, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "2754c571-d28c-4899-8798-a6899e5896dc"],
+ " is the x-value that is a k number of \[CapitalDelta]x\[CloseCurlyQuote]s \
+from ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "1a69ebaf-c948-4ae8-85bd-0b285bc5063f"],
+ ". It can be found using ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "69731418-567d-4c1c-8827-473d7f952dbf"],
+ ", \[CapitalDelta]x, and k."
+}], "Text",
+ CellChangeTimes->{{3.7558119837220373`*^9, 3.755812023811063*^9}, {
+  3.755812058661775*^9, 3.7558121221612263`*^9}, {3.755812171202746*^9, 
+  3.755812357688137*^9}, {3.756335726811142*^9, 3.7563358684230013`*^9}, {
+  3.7563362928496437`*^9, 
+  3.756336388102645*^9}},ExpressionUUID->"87aa7cd6-54db-4d59-b05a-\
+9fed62e2bfe7"],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["x", "k"], "=", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["x", "i"], "+", 
+    RowBox[{"k", "*", "\[CapitalDelta]x"}]}], "=", 
+   RowBox[{
+    RowBox[{"0", "+", 
+     RowBox[{"k", "*", 
+      FractionBox[
+       SqrtBox["\[Pi]"], 
+       RowBox[{"2", "*", "n"}]]}]}], "=", 
+    FractionBox[
+     RowBox[{"k", "*", 
+      SqrtBox["\[Pi]"]}], 
+     RowBox[{"2", "*", "n"}]]}]}]}]], "Text",
+ CellChangeTimes->{{3.755812027251409*^9, 3.75581204064144*^9}, {
+  3.7558123494931507`*^9, 
+  3.755812426279426*^9}},ExpressionUUID->"d3facb9f-e7ca-49ce-b89b-\
+d41967c1ab6d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"k", ",", "1"}]], "=", 
+   FractionBox[
+    RowBox[{"k", "*", 
+     SqrtBox["\[Pi]"]}], 
+    RowBox[{"2", "*", "n"}]]}], ";"}]], "Input",
+ CellChangeTimes->{{3.756082628322804*^9, 
+  3.756082649902405*^9}},ExpressionUUID->"ebecdbe6-d328-43df-9161-\
+9aa3c2196c35"],
+
+Cell[TextData[{
+ "Finally, we need to plug ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]],ExpressionUUID->
+  "06ccfe9f-2ed9-4ea1-9064-7a3dcbec3b7e"],
+ "back into the function to obtain ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", 
+    SubscriptBox["x", "k"], ")"}], TraditionalForm]],ExpressionUUID->
+  "5d40b0c9-8fa6-4758-aac2-da86fd50ee18"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.755812445455665*^9, 
+  3.755812494582376*^9}},ExpressionUUID->"20991c57-712b-46da-8bea-\
+5add9babe89c"],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  SubscriptBox["x", 
+   RowBox[{"k", ",", "1"}]], "]"}]], "Input",
+ CellChangeTimes->{{3.756082925908326*^9, 
+  3.756082938304584*^9}},ExpressionUUID->"6894863b-f7d8-4fcf-a317-\
+c7bdc404a303"],
+
+Cell["\<\
+By combining the previous equations, we can rewrite the RHRS formula.\
+\>", "Text",
+ CellChangeTimes->{{3.7558127351979847`*^9, 
+  3.7558127588361683`*^9}},ExpressionUUID->"a4ef833b-85a3-43e8-b40e-\
+0cf5725b76a4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["A", "1"], "[", "n_", "]"}], "=", 
+  RowBox[{
+   UnderoverscriptBox["\[Sum]", 
+    RowBox[{"k", "=", "1"}], "n"], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      SubscriptBox["x", 
+       RowBox[{"k", ",", "1"}]], "]"}], "*", 
+     SubscriptBox["\[CapitalDelta]x", "1"]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.754331657668702*^9, 3.754331674489394*^9}, {
+  3.754331880756322*^9, 3.754332035074489*^9}, {3.754406482609397*^9, 
+  3.75440648438194*^9}, {3.754444269264722*^9, 3.754444299554758*^9}, {
+  3.7544443460031567`*^9, 3.754444370661907*^9}, {3.754520226288896*^9, 
+  3.7545202538264914`*^9}, {3.754585060978156*^9, 3.754585065852819*^9}, {
+  3.755808476957264*^9, 3.75580847810216*^9}, {3.755808520619672*^9, 
+  3.755808529077124*^9}, {3.755808798919964*^9, 3.755808817062006*^9}, {
+  3.755809123754861*^9, 3.75580912398319*^9}, {3.755809272504218*^9, 
+  3.755809274591146*^9}, {3.756081629203629*^9, 3.7560816421974287`*^9}, {
+  3.756083023992811*^9, 3.756083050312821*^9}, {3.756150918369503*^9, 
+  3.7561509188272142`*^9}},ExpressionUUID->"965c0228-5481-40bf-9dfa-\
+b01da97254e3"],
+
+Cell["\<\
+Below is a table of Riemann Sums. The lower and upper variables control the \
+range of the number of rectangles (To avoid errors, always set the lower \
+variable less than the upper variable.) The interval variable determines the \
+\[OpenCurlyDoubleQuote]jump\[CloseCurlyDoubleQuote] between n values. \
+Finally, the precision variable sets the number of significant figures of the \
+sums. Recall that n represents the number of rectangles used.\
+\>", "Text",
+ CellChangeTimes->{{3.755905278543951*^9, 3.7559053358156223`*^9}, {
+  3.75633644868878*^9, 3.7563365206963778`*^9}, {3.7563365803749123`*^9, 
+  3.756336660109914*^9}, {3.7563374199208727`*^9, 3.7563374479145*^9}, {
+  3.756347493431332*^9, 
+  3.756347504738599*^9}},ExpressionUUID->"41e7430e-5a2a-4acd-9458-\
+1ca39ad0f412"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["lower", "1"], "=", "4595"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["upper", "1"], "=", "4600"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["interval", "1"], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["precision", "1"], "=", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["A", "1"], "[", "x", "]"}], ",", 
+         SubscriptBox["precision", "1"]}], "]"}], ",", "integral"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       SubscriptBox["lower", "1"], ",", 
+       SubscriptBox["upper", "1"], ",", 
+       SubscriptBox["interval", "1"]}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<n\>\"", ",", "\"\<RHRS\>\"", ",", "\"\<\[Integral]\>\""}],
+        "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.755019944767354*^9, 3.75501994993563*^9}, {
+   3.7558080569115257`*^9, 3.755808072344973*^9}, {3.755808627198764*^9, 
+   3.75580862915833*^9}, {3.755808679847787*^9, 3.7558087634968*^9}, {
+   3.755808954087364*^9, 3.755808956312242*^9}, {3.75580910703507*^9, 
+   3.755809110492777*^9}, {3.755809318529705*^9, 3.755809323447215*^9}, 
+   3.7558093598098392`*^9, {3.7558093929611893`*^9, 3.7558094071003*^9}, {
+   3.7558094553597107`*^9, 3.755809459744473*^9}, {3.755809658819021*^9, 
+   3.755809659937457*^9}, {3.7558103409038486`*^9, 3.755810341574374*^9}, {
+   3.755813100370576*^9, 3.755813102424117*^9}, {3.755905217491973*^9, 
+   3.755905220887726*^9}, {3.7559054075778303`*^9, 3.755905445756197*^9}, {
+   3.755905490865518*^9, 3.7559055412951927`*^9}, {3.755905703238508*^9, 
+   3.7559057062527246`*^9}, {3.755960087798573*^9, 3.755960091809165*^9}, {
+   3.755960311185073*^9, 3.7559603460879374`*^9}, {3.7559607392008343`*^9, 
+   3.7559607465090933`*^9}, {3.755961876121436*^9, 3.7559618775281973`*^9}, {
+   3.7560813704534683`*^9, 3.756081377396291*^9}, {3.756093914700536*^9, 
+   3.756093933994609*^9}, {3.7561334708402853`*^9, 3.756133494694718*^9}, {
+   3.756150897288762*^9, 3.756150937454262*^9}, {3.75615144648909*^9, 
+   3.756151500978158*^9}, {3.7561515780161324`*^9, 3.756151707031679*^9}, {
+   3.756151772314752*^9, 3.756151797188244*^9}, {3.756151901445073*^9, 
+   3.75615191078738*^9}, {3.7561545574365187`*^9, 3.756154570748275*^9}, {
+   3.756336644940282*^9, 3.756336646246481*^9}, {3.756336812213604*^9, 
+   3.7563368202540913`*^9}, {3.756351621076517*^9, 3.756351629084689*^9}, {
+   3.756352981144866*^9, 3.7563529814189873`*^9}, {3.756353026716854*^9, 
+   3.756353033738789*^9}, {3.756360962319064*^9, 
+   3.7563609745769978`*^9}},ExpressionUUID->"3406fd7a-0de4-4793-afb4-\
+45bf800ad085"],
+
+Cell[CellGroupData[{
+
+Cell["Questions", "Subsection",
+ CellChangeTimes->{{3.755905357590321*^9, 
+  3.755905358735457*^9}},ExpressionUUID->"cc1418a7-ea91-4a54-901e-\
+b301df26ce66"],
+
+Cell[CellGroupData[{
+
+Cell["1", "Subsubsection",
+ CellChangeTimes->{{3.755905464092785*^9, 3.755905466601672*^9}, {
+   3.755905548143848*^9, 3.755905672493861*^9}, 3.755959489952376*^9, {
+   3.755960382301729*^9, 3.755960408259166*^9}, {3.755960518956305*^9, 
+   3.7559605845936832`*^9}, {3.7559616755722227`*^9, 3.755961695209654*^9}, {
+   3.75596852750886*^9, 3.755968530560678*^9}, {3.756083565656489*^9, 
+   3.7560836764853*^9}, {3.75608378805715*^9, 3.7560838382661057`*^9}, {
+   3.7560841257006807`*^9, 3.756084171904624*^9}, {3.756134353411182*^9, 
+   3.75613438031698*^9}, {3.7561344134681168`*^9, 
+   3.756134452218978*^9}},ExpressionUUID->"76ce2405-5698-4929-9a85-\
+5edc8784b9f0"],
+
+Cell[TextData[{
+ "We can find the number of rectangles needed by plugging in values for the \
+lower, upper, and interval variables. We can start with a large interval and \
+wide range of numbers, then slowly narrow down the variables until we find \
+the first value of n that has a sum of 0.256. Eventually, we find that we \
+need 4597 rectangles for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "fc055c73-a88e-4cef-9ae2-ba3a5a66c4ff"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{
+  3.7561344554102917`*^9, {3.756150970594462*^9, 3.756150993839252*^9}, {
+   3.756151067696826*^9, 3.756151081702704*^9}, {3.756151153172264*^9, 
+   3.756151217076009*^9}, {3.756151816899897*^9, 3.756151818489435*^9}, {
+   3.756151923994052*^9, 3.756152009414233*^9}, {3.756152092986272*^9, 
+   3.756152155186318*^9}, {3.756152651493038*^9, 3.756152658076659*^9}, {
+   3.756154541857181*^9, 3.756154543444463*^9}, {3.756154583204755*^9, 
+   3.7561545861456013`*^9}, {3.756156459439508*^9, 3.756156513498867*^9}, {
+   3.756351503086213*^9, 3.756351562173123*^9}, {3.7563516426405478`*^9, 
+   3.756351673117921*^9}, {3.75635170819923*^9, 3.756351755605452*^9}, {
+   3.756351794909732*^9, 3.756351797367758*^9}, {3.756351919101963*^9, 
+   3.7563519877576103`*^9}, {3.756352298228724*^9, 3.75635241059094*^9}, {
+   3.756352489286129*^9, 3.756352566851583*^9}, {3.7563526020616217`*^9, 
+   3.7563526059911137`*^9}, 3.756352665041994*^9, {3.756352921299432*^9, 
+   3.756352926259053*^9}, {3.756353058570602*^9, 3.756353061093478*^9}, {
+   3.756354138018797*^9, 3.756354184764687*^9}, {3.756354247257316*^9, 
+   3.75635425492703*^9}},ExpressionUUID->"1a70fdb0-8a09-4324-8f96-\
+a3dbd3ddd23d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2", "Subsubsection",
+ CellChangeTimes->{{3.756134440600788*^9, 
+  3.7561344616539392`*^9}},ExpressionUUID->"65bf84e9-94fc-486d-b9ec-\
+52ce2e407f17"],
+
+Cell["\<\
+The choice of function has a clear effect on the number of rectangles needed. \
+We can show this by utilizing functions that have a known integral. Again, \
+for approximating the integral, we will use a RHRS.\
+\>", "Text",
+ CellChangeTimes->{
+  3.756134465968548*^9, {3.756163045213458*^9, 3.756163059513708*^9}, {
+   3.756337686110692*^9, 3.756337696285363*^9}, {3.756338271083576*^9, 
+   3.756338302378186*^9}, {3.756338348134004*^9, 3.756338373370479*^9}, {
+   3.756338404832266*^9, 3.75633843871026*^9}, {3.756360109446766*^9, 
+   3.756360109872409*^9}},ExpressionUUID->"0111083e-74b4-4982-a46f-\
+d4afa08f6c85"],
+
+Cell["Let\[CloseCurlyQuote]s start by defining a function:", "Text",
+ CellChangeTimes->{{3.756360119688504*^9, 3.756360166501096*^9}, {
+  3.756360258296421*^9, 3.7563602730982313`*^9}, {3.7563603058993692`*^9, 
+  3.756360324636839*^9}},ExpressionUUID->"41a6bf29-4bdb-486a-ab1a-\
+4df03b8d826c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["f", "2"], "[", "x_", "]"}], "=", 
+  SuperscriptBox["x", "2"]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0FtI03EcBfCpk5REwh42yEHeN4SKgZeJFxQVL0OdLG21aErt715cMETr
+QXxRWSETFQmE2XRTGXMtUgrBwGBLg9akFI0SnHOD2VARQ1BXv/N9OHzeDoeT
+1q5vfhLL4/EyWaDjXB2tvzgo1wwMxcqZmxu3r8ATszMRZh5GRmB849NRqPXl
+2mBLcGoG9vS+FzQx70zP3YB7BclS+Pj5tSIom/VUwnH5bzJZ1S3hmGMLf8iJ
+Vl8BPHbcksHCuOlGuDq4TU6eWlqgZ1Gnggn8vnkDdmr7yZsPU1YM1J9NGrhv
+bpgV2ifrpH93rczUjHU/DPR4gnBTwQvBU1X9IZS4Ph5DsVJ2Ce0vSshKY5fI
+xvRWOMiXkaulUHhfR86YxRtw6ZloC373trnnmDnxHMn3//vqYL45y/PCHbGw
+aB49j0RkXbS5A+5W5OugoiRsgb6GI7IqJlDrxA9r1XL4YSxfCdNFNaRlaznL
+xVz5bMyGBz+knbBfmKuHv0x3TdAssZI1Ze6Ut8xwg+A6VC9puqDf7iR/aoZf
+QassSqb6kmzwwad75GvTO+0X5tRAMQf/A7PWU6w=
+  
+  "],ExpressionUUID->"6d538c67-867b-4f45-bc61-c5d3f2fc3ad5"],
+
+Cell["\<\
+Next, we set the initial and final x-values of the integral (In other words, \
+the endpoints of the integral.)\
+\>", "Text",
+ CellChangeTimes->{
+  3.7563601147249613`*^9, {3.756360208424005*^9, 
+   3.756360238613172*^9}},ExpressionUUID->"adb6a83b-b80a-4f80-94c3-\
+df29536d0c1b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"i", ",", "questions"}]], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"f", ",", "questions"}]], "=", "1"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.756338306703014*^9, 3.7563383356875963`*^9}, {
+  3.756338822549732*^9, 3.7563388239207783`*^9}, {3.756344783034189*^9, 
+  3.7563447882139997`*^9}},ExpressionUUID->"0f77cfab-ccfa-47b0-861a-\
+8cfafc1f4ef8"],
+
+Cell["Here are the integral and a graph of the function:", "Text",
+ CellChangeTimes->{{3.756338118910757*^9, 3.756338123402856*^9}, {
+  3.7563604271681433`*^9, 
+  3.756360437587122*^9}},ExpressionUUID->"66dfe787-6e05-4174-a3c7-\
+64f062733752"],
+
+Cell[BoxData[{
+ RowBox[{
+  SubscriptBox["integral", "questions"], "=", 
+  RowBox[{"N", "[", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["f", "2"], "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        SubscriptBox["x", 
+         RowBox[{"i", ",", "questions"}]], ",", 
+        SubscriptBox["x", 
+         RowBox[{"f", ",", "questions"}]]}], "}"}]}], "]"}], ",", "3"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["f", "2"], "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     SubscriptBox["x", 
+      RowBox[{"i", ",", "questions"}]], ",", 
+     SubscriptBox["x", 
+      RowBox[{"f", ",", "questions"}]]}], "}"}], ",", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.756163331959607*^9, 3.756163373245101*^9}, {
+  3.756338746528161*^9, 3.7563387593553877`*^9}, {3.756360441421316*^9, 
+  3.7563605004346313`*^9}, {3.756360836020673*^9, 3.756360841302367*^9}, {
+  3.75639361003121*^9, 3.756393614137155*^9}, {3.756393648547879*^9, 
+  3.756393716863388*^9}},ExpressionUUID->"80134571-eca6-4331-88f2-\
+52988a4ba31f"],
+
+Cell["We can find \[CapitalDelta]x:", "Text",
+ CellChangeTimes->{{3.7563384139605*^9, 3.756338416402896*^9}, {
+  3.7563384596189823`*^9, 3.756338464275116*^9}, {3.756360382519846*^9, 
+  3.756360383957572*^9}},ExpressionUUID->"7013d241-6cbd-4c6d-8d15-\
+9d032af63e86"],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["\[CapitalDelta]x", "questions"], "=", 
+  FractionBox[
+   RowBox[{
+    SubscriptBox["x", 
+     RowBox[{"f", ",", "questions"}]], "-", 
+    SubscriptBox["x", 
+     RowBox[{"i", ",", "questions"}]]}], "n"]}]], "Input",
+ CellChangeTimes->{{3.756083746836817*^9, 3.756083775372407*^9}, {
+  3.756338480767288*^9, 
+  3.756338514099183*^9}},ExpressionUUID->"56860381-92de-49f7-a186-\
+49b81375be33"],
+
+Cell[TextData[{
+ "We will now determine ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "44875307-4f59-4b06-bd4e-69a81840bad8"],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.756338535941305*^9, 3.756338561047683*^9}, {
+  3.756360372936247*^9, 
+  3.756360373734973*^9}},ExpressionUUID->"b11f272e-b063-4de8-932c-\
+9c40095ea656"],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["x", 
+   RowBox[{"k", ",", "questions"}]], "=", 
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"i", ",", "questions"}]], "+", 
+   RowBox[{"k", "*", 
+    SubscriptBox["\[CapitalDelta]x", "questions"]}]}]}]], "Input",
+ CellChangeTimes->{{3.756084315576548*^9, 3.75608434562912*^9}, {
+  3.756338574931507*^9, 
+  3.756338595843808*^9}},ExpressionUUID->"560943e1-82e7-47de-9bba-\
+fcc0c8789910"],
+
+Cell[TextData[{
+ "Our next objective is to find the RHRS equation. We already know \
+\[CapitalDelta]x and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]],ExpressionUUID->
+  "53211cc6-a972-4f3d-9a88-0a5bf2c31747"],
+ ", so we just need to find ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", 
+    SubscriptBox["x", "k"], ")"}], TraditionalForm]],ExpressionUUID->
+  "b2ef9181-4eed-4ae6-919a-493d6b7ac65d"],
+ "."
+}], "Text",
+ CellChangeTimes->{
+  3.756155130320435*^9, {3.7561554071185493`*^9, 3.756155425299198*^9}, {
+   3.756360847983876*^9, 
+   3.756360856327286*^9}},ExpressionUUID->"659c533e-16e4-4c0b-802f-\
+a7b284947fb7"],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["f", "2"], "[", 
+  SubscriptBox["x", 
+   RowBox[{"k", ",", "questions"}]], "]"}]], "Input",
+ CellChangeTimes->{{3.756155133194994*^9, 3.756155139989526*^9}, {
+  3.756360870931469*^9, 
+  3.756360871306834*^9}},ExpressionUUID->"6aac1f47-a536-4653-abda-\
+486784a5d8d0"],
+
+Cell["Therefore, the RHRS equation is:", "Text",
+ CellChangeTimes->{
+  3.756155169969386*^9},ExpressionUUID->"9cb18f72-278d-46d0-9a9d-\
+87fe3403f97b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["A", "questions"], "[", "n_", "]"}], "=", 
+  RowBox[{
+   UnderoverscriptBox["\[Sum]", 
+    RowBox[{"k", "=", "1"}], "n"], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["f", "2"], "[", 
+      SubscriptBox["x", 
+       RowBox[{"k", ",", "questions"}]], "]"}], "*", 
+     SubscriptBox["\[CapitalDelta]x", "questions"]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.756155204202715*^9, 3.756155205033072*^9}, {
+  3.756360882138755*^9, 
+  3.756360882522133*^9}},ExpressionUUID->"da880524-0d4b-4c4c-8d7f-\
+d62cf7970b39"],
+
+Cell["\<\
+We can construct a table comparing the Riemann Sums with the exact integral. \
+\
+\>", "Text",
+ CellChangeTimes->{
+  3.7561552237046003`*^9, {3.756337488670897*^9, 
+   3.756337498381466*^9}},ExpressionUUID->"f8eaa1a1-aedd-4e83-a750-\
+78ca6d3a3783"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["lower", "questions"], "=", "3000"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["upper", "questions"], "=", "3005"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["interval", "questions"], "=", "1"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["precision", "questions"], "=", "3"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["A", "questions"], "[", "x", "]"}], ",", 
+         SubscriptBox["precision", "questions"]}], "]"}], ",", 
+       SubscriptBox["integral", "questions"]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       SubscriptBox["lower", "questions"], ",", 
+       SubscriptBox["upper", "questions"], ",", 
+       SubscriptBox["interval", "questions"]}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<n\>\"", ",", "\"\<RHRS\>\"", ",", "\"\<\[Integral]\>\""}],
+        "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0DtIQmEAhmELOZORWDaIDpERmCRkQ4EpJyo0wsKQChosCitCowtdhmgI
+CXUKQ5DMa6GlB8GxJYqQAhvKSY0KakkwApGGqP7vH16e/W2esZvmank8noQE
+yypOOfxTYvWZInXwTNcDjbJWDVS6PSb4fNo2Bndn44ewKHz3wtz2bb2VKFhj
+RbDz0zIEl9IJqsX4Nw/3+d5laPNFM6vwYeQenjcZq1GiumvqG6ZW0vwT4pNa
+zEDPXk0jFIjDEhgJ3ijgRDlLDfQ+5uEvpytAt9R+kSAehNapGpnhDTqPYiW4
+FfJ3J4mlnS9qVivXQgfj74Obrooe6nOMATZIfS7YUZV7oSbZfgxZhZlqk3xE
+oICdjMH+13AK5vNJqlJlEHLE0etxquPFHEgRRRtWapypC17io3OaWhkoLNwR
+o1cti/AfnZPxKw==
+  "],ExpressionUUID->"4da8cbb6-7eb3-496c-925e-ac687cb725f5"],
+
+Cell[TextData[{
+ "For the following examples, I took the integral from 0 to 1 (",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "i"], "=", "0"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6e13d4c5-03be-4642-a07c-2e5f969f5231"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["x", "f"], "=", "1"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "c0df410b-9cf1-4b4e-bb14-35222bd47f37"],
+ ")"
+}], "Text",
+ CellChangeTimes->{{3.756338973645034*^9, 
+  3.75633902914257*^9}},ExpressionUUID->"6fd758ec-3a05-40ab-87a4-\
+09c99d113e44"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["i.", "Subtitle",
+ CellChangeTimes->{{3.7559607871338367`*^9, 3.75596079382535*^9}, 
+   3.756133401349793*^9, 
+   3.756134627939353*^9},ExpressionUUID->"5e7ac1fd-fac6-4af6-836c-\
+6b43f7fe3be7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SuperscriptBox["x", "2"]}]], "Text",
+ CellChangeTimes->{{3.75615578789326*^9, 3.756155799222455*^9}, {
+  3.756164430033893*^9, 3.7561644317722483`*^9}, {3.7562107515763083`*^9, 
+  3.75621075241432*^9}, {3.7563626443932467`*^9, 
+  3.756362644563212*^9}},ExpressionUUID->"5f3bffcb-7fd4-4bf8-8f7f-\
+e3caa2232f71"],
+
+Cell[TextData[{
+ "From x=0 to x=1, this function is increasing and concave up. Using the \
+table, we can see that we need 3001 rectangles for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "d72dad52-864f-4bd9-adf0-145ec765083d"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.7561558154982862`*^9, 3.756155868619686*^9}, {
+   3.756210351071556*^9, 3.7562103579567842`*^9}, 3.756210762924423*^9, {
+   3.756337547991235*^9, 3.756337580743021*^9}, {3.756337712413199*^9, 
+   3.756337713693522*^9}, {3.7563539709891233`*^9, 
+   3.756353973893228*^9}},ExpressionUUID->"3bc90489-4c33-44f8-b765-\
+1663e1d74061"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ii.", "Subtitle",
+ CellChangeTimes->{{3.755970800844905*^9, 3.75597080143194*^9}, 
+   3.756133370760118*^9, 
+   3.756134608958818*^9},ExpressionUUID->"54a70e04-2e76-4194-9996-\
+0785f742b8a3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SqrtBox["x"]}]], "Text",
+ CellChangeTimes->{{3.7561560190838423`*^9, 3.756156028148933*^9}, {
+  3.7563626461280003`*^9, 
+  3.7563626462956333`*^9}},ExpressionUUID->"ef9a1ac2-700b-4f8a-ab90-\
+15693f1a01a7"],
+
+Cell[TextData[{
+ "From x=0 to x=1, this function is increasing and concave down. Using the \
+table, we can see that we need 590 rectangles for the sum to be good to the \
+",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "40072350-e7cd-4232-8c35-dd2455d66fa2"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.756156124129877*^9, 3.756156171376569*^9}, {
+  3.7563375845614433`*^9, 3.7563375928008223`*^9}, {3.7563377163039494`*^9, 
+  3.756337717447949*^9}, {3.756354110360937*^9, 
+  3.756354112042924*^9}},ExpressionUUID->"c5771531-c197-40bb-982d-\
+2fb01b598a8f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iii.", "Subtitle",
+ CellChangeTimes->{{3.755968552174446*^9, 3.755968553169303*^9}, 
+   3.755970792847019*^9, {3.756082401440221*^9, 3.756082404045164*^9}, {
+   3.756085742958219*^9, 3.756085744504765*^9}, 3.7561333741956263`*^9, 
+   3.7561346552382603`*^9},ExpressionUUID->"905c9ba0-a91b-4895-bce2-\
+201038e75ec6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SuperscriptBox["x", "2"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.756362647550262*^9, 
+  3.756362647691948*^9}},ExpressionUUID->"b53782d6-2267-44a5-9280-\
+3ebf534e4aff"],
+
+Cell[TextData[{
+ "From x=0 to x=1, this function is decreasing and concave down. Using the \
+table, we can see that we need 3001 rectangles for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "796ea8e0-5026-4b03-8776-78774d8e53a6"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.7562111236574593`*^9, 3.756211133340948*^9}, {
+  3.756337585650683*^9, 3.756337602715514*^9}, {3.756337719501149*^9, 
+  3.7563377203900023`*^9}, {3.7563547554057817`*^9, 
+  3.756354788249258*^9}},ExpressionUUID->"7ba076ce-4cbc-4295-9997-\
+470d94a4e749"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iv.", "Subtitle",
+ CellChangeTimes->{{3.7561570920078497`*^9, 
+  3.756157094039102*^9}},ExpressionUUID->"e2c8b823-dfea-497a-ad44-\
+99b00a280692"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SqrtBox["x"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.7562362663448133`*^9, 3.756236270444777*^9}, {3.756362649280308*^9, 
+  3.756362649449435*^9}},ExpressionUUID->"a41cb36c-2aad-4274-a4d6-\
+ae99c911ab61"],
+
+Cell[TextData[{
+ "From x=0 to x=1, this function is decreasing and concave up. Using the \
+table, we can see that we need 590 rectangles for the sum to be good to the \
+",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "a0f623e6-05ef-402b-9af5-036f09f46651"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.7562111236574593`*^9, 3.756211133340948*^9}, {
+  3.7562364446231747`*^9, 3.756236452747622*^9}, {3.756337586840234*^9, 
+  3.756337629549209*^9}, {3.756337723367364*^9, 3.756337724972311*^9}, {
+  3.756354924404276*^9, 
+  3.756354929182756*^9}},ExpressionUUID->"6bf95e69-9b20-4d8d-9b09-\
+b8d3f143879d"],
+
+Cell["\<\
+It seems that, if the growth pattern (increasing/decreasing) and concavity \
+are \[OpenCurlyDoubleQuote]opposites,\[CloseCurlyDoubleQuote] such as in \
+examples ii and iv, the number of rectangles required is significantly less \
+than the number of rectangles needed if the growth pattern and concavity are \
+the \[OpenCurlyDoubleQuote]same,\[CloseCurlyDoubleQuote] such as in examples \
+i and iii. In other words, functions that are concave up and decreasing or \
+concave down and increasing are likely to need a smaller number of rectangles \
+than functions that are concave up and increasing or concave down and \
+decreasing.\
+\>", "Text",
+ CellChangeTimes->{{3.756343468957632*^9, 3.756343506548162*^9}, {
+  3.756343559955282*^9, 3.756343826981851*^9}, {3.756343859596017*^9, 
+  3.756343862207468*^9}, {3.756390186444997*^9, 
+  3.756390333296809*^9}},ExpressionUUID->"0a1091d8-eb92-47ac-ae87-\
+d27308175934"],
+
+Cell[CellGroupData[{
+
+Cell["3", "Subsubsection",
+ CellChangeTimes->{
+  3.75613472485334*^9},ExpressionUUID->"b4fb71a3-4722-4f76-b010-94b1f6f93444"],
+
+Cell["\<\
+We can also approximate the solution with a Trapezoid Riemann Sum (TRS). \
+Instead of splitting the area under the curve into rectangles, we will split \
+it into trapezoids. The basic form of a TRS is:\
+\>", "Text",
+ CellChangeTimes->{{3.7563451493967743`*^9, 3.756345240739128*^9}, {
+  3.7563452907850723`*^9, 3.756345294844508*^9}, {3.756358690755989*^9, 
+  3.756358742971376*^9}},ExpressionUUID->"45692810-00fa-43ef-88df-\
+06547e031b87"],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["\[CapitalDelta]x", "2"], "[", 
+  RowBox[{
+   RowBox[{"f", 
+    RowBox[{"(", 
+     SubscriptBox["x", "0"], ")"}]}], "+", 
+   RowBox[{"2", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      UnderoverscriptBox["\[Sum]", 
+       RowBox[{"k", "=", "1"}], 
+       RowBox[{"n", "-", "1"}]], 
+      RowBox[{"f", 
+       RowBox[{"(", 
+        SubscriptBox["x", "k"], ")"}]}]}], ")"}]}], "+", 
+   RowBox[{"f", 
+    RowBox[{"(", 
+     SubscriptBox["x", "n"], ")"}]}]}], "]"}]], "Text",
+ CellChangeTimes->{{3.7563587536216917`*^9, 3.756358844565468*^9}, {
+  3.75636168789692*^9, 3.756361720858646*^9}, {3.7563618408107653`*^9, 
+  3.756361845967588*^9}, {3.756362232850232*^9, 3.756362233967498*^9}, {
+  3.756412447236969*^9, 
+  3.756412453898686*^9}},ExpressionUUID->"28aa1147-3bbb-48ad-b2b8-\
+04b0610a2e12"],
+
+Cell["\<\
+The only difference between questions 2 and 3 is the final Riemann Sum \
+equation. We will utilize the function and variables defined in question 2 \
+for this problem. Thus, the TRS equation is:\
+\>", "Text",
+ CellChangeTimes->{{3.756361389168378*^9, 3.7563615913040533`*^9}, {
+  3.756362171067794*^9, 3.75636218701331*^9}, {3.7563623991197147`*^9, 
+  3.756362399835081*^9}},ExpressionUUID->"f62b4628-c1c0-4fc9-97ed-\
+e6e27135a392"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["A", "trapezoids"], "[", "n_", "]"}], "=", 
+  RowBox[{
+   FractionBox[
+    SubscriptBox["\[CapitalDelta]x", "questions"], "2"], "*", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["f", "2"], "[", 
+      SubscriptBox["x", 
+       RowBox[{"i", ",", "questions"}]], "]"}], "+", 
+     RowBox[{"2", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        UnderoverscriptBox["\[Sum]", 
+         RowBox[{"k", "=", "1"}], 
+         RowBox[{"n", "-", "1"}]], 
+        RowBox[{
+         SubscriptBox["f", "2"], "[", 
+         SubscriptBox["x", 
+          RowBox[{"k", ",", "questions"}]], "]"}]}], ")"}]}], "+", 
+     RowBox[{
+      SubscriptBox["f", "2"], "[", 
+      SubscriptBox["x", 
+       RowBox[{"f", ",", "questions"}]], "]"}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.756361602999712*^9, 3.7563616852882967`*^9}, {
+  3.756361725877594*^9, 3.756361799443276*^9}, {3.7563618496364613`*^9, 
+  3.75636186541422*^9}, {3.7563622394751263`*^9, 
+  3.756362246095355*^9}},ExpressionUUID->"3aaf0fd9-cbdf-4fc3-9151-\
+016dfdba2e37"],
+
+Cell["\<\
+We can create a table showing the TRS and the actual integral. To help \
+compare, I also added a column with the RHRS.\
+\>", "Text",
+ CellChangeTimes->{{3.7563619248599777`*^9, 
+  3.756361991984331*^9}},ExpressionUUID->"dcb6c711-1615-4ae1-ae77-\
+c37785c47890"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["lower", "3"], "=", "110"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["upper", "3"], "=", "120"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["interval", "3"], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["precision", "3"], "=", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["A", "questions"], "[", "x", "]"}], ",", 
+         SubscriptBox["precision", "3"]}], "]"}], ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["A", "trapezoids"], "[", "x", "]"}], ",", 
+         SubscriptBox["precision", "3"]}], "]"}], ",", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         SubscriptBox["integral", "questions"], ",", "3"}], "]"}]}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       SubscriptBox["lower", "3"], ",", 
+       SubscriptBox["upper", "3"], ",", 
+       SubscriptBox["interval", "3"]}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<n\>\"", ",", "\"\<RHRS\>\"", ",", "\"\<TRS\>\"", ",", 
+        "\"\<\[Integral]\>\""}], "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdzztIQmEAhmELcTqQWDaYDpERmCRkQ4EphoRGWBiSRYNEZUOodM8hGsIi
+hSAMQTKvlZaKYUPQVoQ02FDRYEYXaijBiEIcojrfP7w881s7bNGNljMYDAEd
+LEgS4u6fvFKdzhE79xVtUCuol0Gx06WDD7sNfXBpJLoJc+xXN7yxXVSYaKlp
+JQc2fxi74EQqRjRq/8bhKtNthWZPOD0Fr3ou4UG1thimlbYMlWByMsXcob2X
+clnQtVxWBSlukAdD/nMRNBQyRF/7dRb+JhR30Mm3nMRoNwIzRJlA8wLXtiJ5
+uBDwtsZp84ufxIxcKId2lrcDzju+1VB9w9LASr7HAZuKQjeUxRu3oVKkJ5p5
+7yFIKQciUPUUTMJsNk4USzTsBG3vWT/R/qj3JWk5cybimMtfd4h/HSWFx95n
+FQwZOBq4J7euwFLNmwPeqqVeKDuaJa5Tg1FoO/0i/gMjVgz0
+  
+  "],ExpressionUUID->"f135b68e-c4c6-48f6-94e3-6b7b5d307536"],
+
+Cell["\<\
+Let\[CloseCurlyQuote]s compare the RHRS and TRS for the functions that we \
+used in the examples for question 2.\
+\>", "Text",
+ CellChangeTimes->{{3.756362342084956*^9, 
+  3.756362387941378*^9}},ExpressionUUID->"7070b868-c094-443b-a1b9-\
+5b47692e1b73"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["i", "Subtitle",
+ CellChangeTimes->{
+  3.7563624488148317`*^9},ExpressionUUID->"7b8c06b0-718e-4240-8799-\
+9e3df0b7acba"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SuperscriptBox["x", "2"]}]], "Text",
+ CellChangeTimes->{{3.75615578789326*^9, 3.756155799222455*^9}, {
+  3.756164430033893*^9, 3.7561644317722483`*^9}, {3.7562107515763083`*^9, 
+  3.75621075241432*^9}, {3.756362692302565*^9, 
+  3.756362692636586*^9}},ExpressionUUID->"2fe99301-b827-4491-a39b-\
+8e7960b784e1"],
+
+Cell[TextData[{
+ "We now need only 32 trapezoids (as opposed to 3001 rectangles with a RHRS) \
+for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "b9526641-fe0c-4cca-815f-697dd3fa6e6e"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{
+  3.7563625322669697`*^9, {3.756362565949751*^9, 3.756362632554862*^9}, {
+   3.756402423575952*^9, 
+   3.7564024265099163`*^9}},ExpressionUUID->"1c422f3c-6293-4f16-95de-\
+1cf489fd6545"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ii", "Subtitle",
+ CellChangeTimes->{{3.756362458092444*^9, 
+  3.756362458275671*^9}},ExpressionUUID->"76f4d53a-565d-4b95-9cb8-\
+00901be76261"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SqrtBox["x"]}]], "Text",
+ CellChangeTimes->{{3.7561560190838423`*^9, 3.756156028148933*^9}, {
+  3.756362703192185*^9, 
+  3.756362708592108*^9}},ExpressionUUID->"70bd4be3-5cc6-480b-8e64-\
+b2a9ae5042de"],
+
+Cell[TextData[{
+ "We now need only 115 trapezoids (as opposed to 590 rectangles with a RHRS) \
+for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "233eabe2-887d-4825-a0d3-401364ce8e48"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.756362777067432*^9, 3.756362802501464*^9}, {
+   3.7563629207296743`*^9, 3.756362927190115*^9}, 
+   3.7564024321237793`*^9},ExpressionUUID->"0067633c-2db8-4f39-9cd1-\
+6a96f519a6f3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iii", "Subtitle",
+ CellChangeTimes->{{3.7563624646149483`*^9, 
+  3.756362464968017*^9}},ExpressionUUID->"d86969a5-1246-477d-9e0e-\
+a838b42f008a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SuperscriptBox["x", "2"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.756362647550262*^9, 
+  3.756362647691948*^9}},ExpressionUUID->"980fc1f9-b01f-4407-a2f1-\
+c178b48a569b"],
+
+Cell[TextData[{
+ "We now need only 32 trapezoids (as opposed to 3001 rectangles with a RHRS) \
+for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "78790742-7ba0-4901-aa84-24a3121757b9"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{3.756363009192088*^9, 
+  3.756402435332323*^9},ExpressionUUID->"1f18acec-ca32-4956-b12a-\
+aa6dbb353328"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iv", "Subtitle",
+ CellChangeTimes->{{3.756362471549499*^9, 
+  3.756362472227006*^9}},ExpressionUUID->"4894de5f-fb53-4c1b-bcd8-\
+0472977cfa42"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SqrtBox["x"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.7562362663448133`*^9, 3.756236270444777*^9}, {3.756362649280308*^9, 
+  3.756362649449435*^9}},ExpressionUUID->"cdc057b0-81e1-4267-a270-\
+61e7bb54ba77"],
+
+Cell[TextData[{
+ "We now need only 115 trapezoids (as opposed to 590 rectangles with a RHRS) \
+for the sum to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "7940c11e-041b-4be7-a3ef-f9accd0680fe"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.756362777067432*^9, 3.756362802501464*^9}, {
+   3.7563629207296743`*^9, 3.756362927190115*^9}, 
+   3.7564024376811533`*^9},ExpressionUUID->"87f827e9-64df-4991-9485-\
+697714bddc58"],
+
+Cell["\<\
+Obviously, using trapezoids makes a significant difference in the number of \
+rectangles required. For all four examples, the number of \
+trapezoids/rectangles required decreased when using the TRS compared to when \
+using the RHRS. This is probably because sloped lines (which trapezoids have) \
+mimic a curve much better than straight lines (which rectangles have).\
+\>", "Text",
+ CellChangeTimes->{{3.7563631254129467`*^9, 3.7563632125020723`*^9}, {
+  3.7563895495734453`*^9, 3.756389672765023*^9}, {3.756389733997254*^9, 
+  3.756389863746038*^9}, {3.7564149348529463`*^9, 
+  3.756414936306418*^9}},ExpressionUUID->"f77967c7-9de3-407c-a421-\
+b7f668e0dc09"],
+
+Cell[CellGroupData[{
+
+Cell["Part 2", "Section",
+ CellChangeTimes->{{3.75583608755261*^9, 
+  3.755836092714498*^9}},ExpressionUUID->"8a8c6fca-3904-4e4e-8b48-\
+1fe1be59a1e7"],
+
+Cell[TextData[{
+ "We can also utilize probability to estimate the integral. In this case, we \
+will randomly throw darts at a graph of the equation ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"tan", "(", 
+     SuperscriptBox["x", "2"], ")"}]}], TraditionalForm]],ExpressionUUID->
+  "c90ab128-5376-4e20-8090-6b344f79155c"],
+ ". If a dart lands between the graph and the x-axis, it is a hit. If it \
+lands outside this region, it is a miss. The darts variable controls the \
+number of darts to be used. The hits variable is a counter that will be used \
+later. Note that the hits variable should always start at 0."
+}], "Text",
+ CellChangeTimes->{{3.755836108837139*^9, 3.755836153347556*^9}, {
+   3.756086211098958*^9, 3.756086291527615*^9}, {3.756091578457509*^9, 
+   3.7560917899512577`*^9}, 3.756092071009221*^9, {3.756092273430728*^9, 
+   3.7560922970802383`*^9}, {3.75639045995499*^9, 3.756390476746749*^9}, {
+   3.7563939864080772`*^9, 
+   3.756394037159808*^9}},ExpressionUUID->"96841372-f56a-4281-83f2-\
+6ab5dcdb84ab"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"darts", "=", "100"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"hits", "=", "0"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.75583690453685*^9, 3.755836915854879*^9}, {
+   3.755905695260221*^9, 3.755905696067481*^9}, {3.755905750864222*^9, 
+   3.755905751255224*^9}, {3.755905788543928*^9, 3.7559057886890583`*^9}, {
+   3.7559060767299128`*^9, 3.755906076943467*^9}, {3.755906119639594*^9, 
+   3.755906120461699*^9}, {3.7559598173819103`*^9, 3.755959820851884*^9}, {
+   3.755959869885558*^9, 3.755959925616291*^9}, 3.7559600989621687`*^9, {
+   3.7560868051782293`*^9, 3.756086805769264*^9}, {3.756092206213113*^9, 
+   3.756092234795704*^9}, {3.756093949165269*^9, 3.756093958899152*^9}, 
+   3.7560943951976423`*^9, 3.7561579208411283`*^9, {3.7563412930283117`*^9, 
+   3.756341293590583*^9}, {3.756346568367998*^9, 3.75634656917245*^9}, {
+   3.756347601924885*^9, 3.756347602293376*^9}, {3.756347653164785*^9, 
+   3.756347681943438*^9}, 3.756347848865508*^9, {3.756350046672583*^9, 
+   3.756350048571295*^9}, 3.756351828147695*^9, {3.7563925717768784`*^9, 
+   3.756392571935059*^9}},ExpressionUUID->"54b43ad8-d4fd-40b3-a8eb-\
+40cc23fe11d8"],
+
+Cell[TextData[{
+ "Again, here is a graph of the original function. The domain of the graph is \
+determined by the endpoints of the integral (in this case, from 0 to ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    SqrtBox["\[Pi]"], "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "b7166a8d-2a4d-4de7-8356-a25152c8cb53"],
+ "). The range is determined by plugging the endpoints of the domain into the \
+function. For example, in this problem, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"tan", "(", 
+     SuperscriptBox["0", "2"], ")"}], "=", "0"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "3a27f3ed-57b8-4711-bf81-e074d4f502a0"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"tan", "(", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       FractionBox[
+        SqrtBox["\[Pi]"], "2"], ")"}], "2"], ")"}], "=", "1"}], 
+   TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "76ba833b-e861-4bf9-ba5f-98e3b2247899"],
+ ", so the range goes from 0 to 1."
+}], "Text",
+ CellChangeTimes->{{3.75633799952877*^9, 3.756338008817642*^9}, {
+  3.7563950068837214`*^9, 3.7563952748718147`*^9}, {3.756395566570353*^9, 
+  3.756395570928523*^9}},ExpressionUUID->"421defa0-df62-4a66-af75-\
+e5bf8300a742"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Tan", "[", 
+    SuperscriptBox["x", "2"], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", 
+     FractionBox[
+      SqrtBox["\[Pi]"], "2"]}], "}"}], ",", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7558361898543167`*^9, 3.755836270087915*^9}, {
+  3.7558364057996273`*^9, 
+  3.755836465038538*^9}},ExpressionUUID->"75a1b38f-f2c9-4854-baeb-\
+d2129c949bcb"],
+
+Cell["\<\
+To generate the darts, we randomly pick numbers from within the specified \
+domain and range. We can create a table showing the numbers that were picked \
+(I suppressed this line of code because it takes a long time with a large \
+number of darts.) Finally, we can create a visual of the \
+\[OpenCurlyDoubleQuote]dartboard\[CloseCurlyDoubleQuote] with the function \
+and the darts shown.\
+\>", "Text",
+ CellChangeTimes->{{3.7560863330347633`*^9, 3.756086512377254*^9}, {
+  3.7560865846554413`*^9, 3.756086800443063*^9}, {3.756091638099015*^9, 
+  3.7560916440675507`*^9}, {3.7560921315503597`*^9, 3.756092150928638*^9}, {
+  3.756391457130498*^9, 
+  3.7563914667192793`*^9}},ExpressionUUID->"532a83b9-f3f0-43d6-a8d5-\
+894342a9ce46"],
+
+Cell[BoxData[{
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["x", "2"], "[", "k", "]"}], ",", 
+      RowBox[{
+       SubscriptBox["y", "2"], "[", "k", "]"}]}], "}"}], "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          FractionBox[
+           SqrtBox["\[Pi]"], "2"]}], "}"}], ",", "3"}], "]"}], ",", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "1"}], "}"}], ",", "3"}], "]"}]}], "}"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", "darts"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k", ",", 
+        RowBox[{
+         SubscriptBox["x", "2"], "[", "k", "]"}], ",", 
+        RowBox[{
+         SubscriptBox["y", "2"], "[", "k", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", "darts"}], "}"}]}], "]"}], ",", 
+    RowBox[{"TableHeadings", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<\>\"", ",", "\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], 
+      "}"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["x", "2"], "[", "k", "]"}], ",", 
+         RowBox[{
+          SubscriptBox["y", "2"], "[", "k", "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "darts"}], "}"}]}], "]"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Red", ",", 
+        RowBox[{"PointSize", "[", ".02", "]"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Tan", "[", 
+      SuperscriptBox["x", "2"], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", 
+       FractionBox[
+        SqrtBox["\[Pi]"], "2"]}], "}"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Black", "}"}]}]}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.755836524440627*^9, 3.755836541284348*^9}, {
+   3.755836575692875*^9, 3.7558365798477716`*^9}, {3.755836699618544*^9, 
+   3.755836700560709*^9}, {3.7558367332776337`*^9, 3.755836808191424*^9}, {
+   3.755836928146715*^9, 3.75583693536264*^9}, {3.755877498224929*^9, 
+   3.755877514221004*^9}, {3.75590582711551*^9, 3.7559058384634743`*^9}, {
+   3.755905870538454*^9, 3.755905872669108*^9}, {3.755905916282881*^9, 
+   3.7559059282185917`*^9}, {3.75590601782448*^9, 3.755906064976927*^9}, 
+   3.755906180880308*^9, {3.755906372375607*^9, 3.7559063737162323`*^9}, {
+   3.755906412552664*^9, 3.7559064384392347`*^9}, {3.755907692086008*^9, 
+   3.755907762319812*^9}, {3.7559078165752897`*^9, 3.755907830746492*^9}, {
+   3.7559601528445*^9, 3.755960173209221*^9}, {3.7561580257181168`*^9, 
+   3.756158048839592*^9}, {3.75639037335841*^9, 
+   3.756390406760968*^9}},ExpressionUUID->"52ce704b-6a85-4eab-aca4-\
+f18df29914d3"],
+
+Cell["\<\
+We need to count the number of hits. To do this, we go through every dart and \
+check whether its y-value is less than or equal to the value obtained by \
+plugging the x-value of the dart into the function. If so, then the dart lies \
+under the curve, and we add 1 to the hits variable.\
+\>", "Text",
+ CellChangeTimes->{{3.756092425620617*^9, 3.756092434580018*^9}, {
+  3.756092545104353*^9, 3.7560925528101387`*^9}, {3.7560929258281918`*^9, 
+  3.756092948953638*^9}, {3.756394072794147*^9, 3.7563941351510267`*^9}, {
+  3.756399875386054*^9, 
+  3.756399970095933*^9}},ExpressionUUID->"7cc56baf-0486-4ea9-974f-\
+1b80a01f4a29"],
+
+Cell[BoxData[{
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SubscriptBox["y", "2"], "[", "k", "]"}], "\[LessSlantEqual]", 
+      RowBox[{"Tan", "[", 
+       SuperscriptBox[
+        RowBox[{
+         SubscriptBox["x", "2"], "[", "k", "]"}], "2"], "]"}]}], ",", 
+     RowBox[{"hits", "++"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", "darts"}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", "hits"}], "Input",
+ CellChangeTimes->{{3.755837023757599*^9, 3.7558371816305037`*^9}, {
+   3.7558775274325933`*^9, 3.755877532188801*^9}, {3.755906098336607*^9, 
+   3.75590609893353*^9}, {3.755959236326323*^9, 3.755959238216367*^9}, 
+   3.756157958389894*^9, {3.756345436405669*^9, 3.756345438408392*^9}, {
+   3.756390393137735*^9, 
+   3.7563904127127743`*^9}},ExpressionUUID->"f9193000-0326-4a12-9216-\
+218e8efaa8b0"],
+
+Cell["\<\
+This step is where probability comes in. Since the darts were thrown \
+randomly, the ratio of the number of darts under the curve to the total \
+number of darts should be equal to the ratio of the area under the curve to \
+the total area (which is the area of the rectangular region). Therefore, we \
+can estimate the area under the curve by multiplying the fraction of total \
+darts that were hits by the area of the rectangular region.\
+\>", "Text",
+ CellChangeTimes->{{3.756093803509598*^9, 3.75609387399214*^9}, {
+  3.7563959759960318`*^9, 
+  3.7563961979892387`*^9}},ExpressionUUID->"8e2c7d01-6ec0-43f8-8619-\
+1e1ab4f76979"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"area", "=", 
+   RowBox[{
+    FractionBox["hits", "darts"], "*", 
+    FractionBox[
+     SqrtBox["\[Pi]"], "2"], "*", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["precision", "2"], "=", "3"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"N", "[", 
+        RowBox[{"area", ",", 
+         SubscriptBox["precision", "2"]}], "]"}], ",", "integral"}], "}"}], 
+     ",", "1"}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Estimate\>\"", ",", "\"\<\[Integral]\>\""}], "}"}]}], 
+     "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.755864714561467*^9, 3.755864817571012*^9}, {
+  3.75587725406847*^9, 3.755877254273078*^9}, {3.755877541282798*^9, 
+  3.755877544214199*^9}, {3.75595984505903*^9, 3.755959845437381*^9}, {
+  3.756347590453062*^9, 3.756347591322444*^9}, {3.7563930585160427`*^9, 
+  3.756393061497408*^9}, {3.7563931188737783`*^9, 3.756393119477489*^9}, {
+  3.7563932651481867`*^9, 
+  3.756393404765726*^9}},ExpressionUUID->"da4042fb-2da8-4263-a2bd-\
+4e33abab3ec2"],
+
+Cell[CellGroupData[{
+
+Cell["Questions", "Subsection",
+ CellChangeTimes->{{3.756094106934822*^9, 
+  3.756094108007844*^9}},ExpressionUUID->"e52ea43b-1e94-4076-98de-\
+7fb5adf93fd1"],
+
+Cell[CellGroupData[{
+
+Cell["1", "Subsubsection",
+ CellChangeTimes->{{3.7563542934839993`*^9, 
+  3.756354325580386*^9}},ExpressionUUID->"732aa2a2-7f12-4b97-912c-\
+4bbc147adb11"],
+
+Cell[TextData[{
+ "For the answer to be good to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "c0f821bc-b598-41ad-8a37-de7799748c3b"],
+ " decimal place, we need more than 100000 darts. Since the locations of the \
+darts are chosen randomly, the estimates can differ significantly even when n \
+is constant. For example, when I set n=100000, the approximations ranged from \
+0.248 to 0.262, which is a relatively wide range of numbers."
+}], "Text",
+ CellChangeTimes->{{3.755960072485859*^9, 3.755960073544055*^9}, {
+   3.756094002552391*^9, 3.756094089451317*^9}, {3.756094127427081*^9, 
+   3.756094130817748*^9}, 3.75627325885363*^9, {3.7563496734298983`*^9, 
+   3.756349917615239*^9}, {3.756350597036006*^9, 3.756350674387196*^9}, {
+   3.756354284873752*^9, 3.756354285382045*^9}, 3.756354343637917*^9, {
+   3.7563963081718388`*^9, 3.7563963215903673`*^9}, {3.7563963639762173`*^9, 
+   3.756396418110355*^9}, {3.7564116079946117`*^9, 
+   3.756411627554215*^9}},ExpressionUUID->"ee660bcd-466d-42df-b243-\
+44eee82fa397"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2", "Subsubsection",
+ CellChangeTimes->{
+  3.756354352671364*^9},ExpressionUUID->"60c75bba-4b29-459e-8038-\
+987d7a1c834f"],
+
+Cell["\<\
+We can see whether different functions change the number of darts needed by \
+using functions that have a known integral. Let\[CloseCurlyQuote]s start by \
+defining a function:\
+\>", "Text",
+ CellChangeTimes->{{3.756389997817247*^9, 3.756390104235055*^9}, {
+  3.756390363521303*^9, 3.7563903642914124`*^9}, {3.756393940189466*^9, 
+  3.756393966407482*^9}},ExpressionUUID->"8681b943-2c70-42fb-ad53-\
+e94fe5f1ecd7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SubscriptBox["f", "dart"], "[", "x_", "]"}], "=", 
+  RowBox[{"1", "-", 
+   SqrtBox["x"]}]}]], "Input",
+ CellChangeTimes->{{3.756390665476933*^9, 3.756390734036646*^9}, {
+  3.756404821234117*^9, 3.756404826870891*^9}, {3.7564050964630823`*^9, 
+  3.756405096838798*^9}},ExpressionUUID->"03ea217d-c452-4518-aaee-\
+114ec3e12773"],
+
+Cell["Once again, we have the darts and hits variables.", "Text",
+ CellChangeTimes->{{3.756394205110559*^9, 
+  3.756394217022955*^9}},ExpressionUUID->"c5af2d2d-7754-497b-ba1b-\
+97c5e5517946"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["darts", "questions"], "=", "100"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["hits", "questions"], "=", "0"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7563904335642443`*^9, 3.7563904540861187`*^9}, {
+   3.756391172263068*^9, 3.756391172426688*^9}, {3.75639253247596*^9, 
+   3.756392532668064*^9}, {3.756396786790759*^9, 3.756396792758882*^9}, {
+   3.7563968579854183`*^9, 3.7563968803860197`*^9}, {3.7563969170701103`*^9, 
+   3.756396919180182*^9}, 3.756396979179223*^9, {3.756397836139707*^9, 
+   3.7563978376015997`*^9}, 3.756398706671486*^9, {3.75640337160639*^9, 
+   3.756403373594636*^9}, {3.756411564897415*^9, 
+   3.75641156527326*^9}},ExpressionUUID->"a783efb5-7cf5-4e26-9a45-\
+35fdf246c3c7"],
+
+Cell[TextData[{
+ "We can also control the endpoints of the integral (",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "8efecdf7-b8c8-413b-99e6-797619bbfc62"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "f"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "2420cfed-80ba-46b4-8e95-71b43162def0"],
+ "). I also added variables for the endpoints of the range (",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["y", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "0f8cf822-89df-4125-9969-9f2b875ff11f"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["y", "f"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "cf825508-1b70-4a0b-9073-e1262cea2e08"],
+ "), which will be changed in question 3. "
+}], "Text",
+ CellChangeTimes->{
+  3.7563601147249613`*^9, {3.756360208424005*^9, 3.756360238613172*^9}, {
+   3.7563949011318607`*^9, 3.756394909820019*^9}, {3.7563986726943703`*^9, 
+   3.756398693332057*^9}, {3.756398737680814*^9, 3.756398852170422*^9}, {
+   3.7563990893162518`*^9, 3.756399113010529*^9}, {3.756399151574555*^9, 
+   3.7563991678448277`*^9}},ExpressionUUID->"90c8257e-f7e1-4533-8b55-\
+2c2a254b78bd"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"i", ",", "dart"}]], "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"f", ",", "dart"}]], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["y", 
+    RowBox[{"i", ",", "dart"}]], "=", 
+   RowBox[{
+    SubscriptBox["f", "dart"], "[", 
+    SubscriptBox["x", 
+     RowBox[{"i", ",", "dart"}]], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["y", 
+    RowBox[{"f", ",", "dart"}]], "=", 
+   RowBox[{
+    SubscriptBox["f", "dart"], "[", 
+    SubscriptBox["x", 
+     RowBox[{"f", ",", "dart"}]], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.756338306703014*^9, 3.7563383356875963`*^9}, {
+   3.756338822549732*^9, 3.7563388239207783`*^9}, {3.756344783034189*^9, 
+   3.7563447882139997`*^9}, {3.756390604888022*^9, 3.75639060752627*^9}, {
+   3.7563908282068787`*^9, 3.756390830487033*^9}, 3.756392615633667*^9, 
+   3.756396795608431*^9, {3.756398422689418*^9, 3.75639847944479*^9}, {
+   3.756399179502029*^9, 
+   3.7563991935750523`*^9}},ExpressionUUID->"9a82510b-6762-4e8a-abf0-\
+0c27fe946f2d"],
+
+Cell["\<\
+Here are the integral and a graph of the function. Notice that the domain is \
+between the endpoints. In this problem, the range is found by plugging the \
+endpoints into the function.\
+\>", "Text",
+ CellChangeTimes->{{3.756338118910757*^9, 3.756338123402856*^9}, {
+  3.7563604271681433`*^9, 3.756360437587122*^9}, {3.7563953355286922`*^9, 
+  3.756395421916683*^9}, {3.756395549281211*^9, 3.756395552136118*^9}, {
+  3.7563994641567783`*^9, 
+  3.756399490670679*^9}},ExpressionUUID->"bb920c79-e7e4-4169-bef0-\
+4951701d2376"],
+
+Cell[BoxData[{
+ RowBox[{
+  SubscriptBox["integral", "dart"], "=", 
+  RowBox[{"N", "[", 
+   RowBox[{
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["f", "dart"], "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        SubscriptBox["x", 
+         RowBox[{"i", ",", "dart"}]], ",", 
+        SubscriptBox["x", 
+         RowBox[{"f", ",", "dart"}]]}], "}"}]}], "]"}], ",", "3"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["f", "dart"], "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", 
+     SubscriptBox["x", 
+      RowBox[{"i", ",", "dart"}]], ",", 
+     SubscriptBox["x", 
+      RowBox[{"f", ",", "dart"}]]}], "}"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["x", 
+         RowBox[{"i", ",", "dart"}]], ",", 
+        SubscriptBox["x", 
+         RowBox[{"f", ",", "dart"}]]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["y", 
+         RowBox[{"i", ",", "dart"}]], ",", 
+        SubscriptBox["y", 
+         RowBox[{"f", ",", "dart"}]]}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.756163331959607*^9, 3.756163373245101*^9}, {
+  3.756338746528161*^9, 3.7563387593553877`*^9}, {3.756360441421316*^9, 
+  3.7563605004346313`*^9}, {3.756360836020673*^9, 3.756360841302367*^9}, {
+  3.756390601482071*^9, 3.7563906178700943`*^9}, {3.756390739422833*^9, 
+  3.756390749404696*^9}, {3.756393496559229*^9, 3.75639351978146*^9}, {
+  3.7563935498642683`*^9, 3.7563935604629507`*^9}, {3.756393763625002*^9, 
+  3.756393769432481*^9}, {3.756398458187401*^9, 3.756398470812862*^9}, {
+  3.7563985441429863`*^9, 3.7563985676391163`*^9}, {3.756398599677411*^9, 
+  3.7563986075335712`*^9}},ExpressionUUID->"41e852fe-e0ea-4cb6-9a24-\
+ca3ab3041187"],
+
+Cell["\<\
+We choose random numbers from within the specified domain and range to \
+represent the darts. I created a table showing these values (Again, the table \
+is suppressed.) Finally, we can plot the darts onto the actual graph.\
+\>", "Text",
+ CellChangeTimes->{{3.7563949324724483`*^9, 3.756394975371773*^9}, {
+  3.7563954509118137`*^9, 3.756395504391828*^9}, {3.756395595099764*^9, 
+  3.756395727626862*^9}, {3.7563957925918713`*^9, 
+  3.756395812369276*^9}},ExpressionUUID->"5da569fe-39ee-4d48-82a8-\
+b2a4baba02f5"],
+
+Cell[BoxData[{
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["x", "dart"], "[", "k", "]"}], ",", 
+      RowBox[{
+       SubscriptBox["y", "dart"], "[", "k", "]"}]}], "}"}], "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["x", 
+           RowBox[{"i", ",", "dart"}]], ",", 
+          SubscriptBox["x", 
+           RowBox[{"f", ",", "dart"}]]}], "}"}], ",", "3"}], "]"}], ",", 
+      RowBox[{"Random", "[", 
+       RowBox[{"Real", ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["y", 
+           RowBox[{"i", ",", "dart"}]], ",", 
+          SubscriptBox["y", 
+           RowBox[{"f", ",", "dart"}]]}], "}"}], ",", "3"}], "]"}]}], "}"}]}],
+    ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", 
+     SubscriptBox["darts", "questions"]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"k", ",", 
+        RowBox[{
+         SubscriptBox["x", "dart"], "[", "k", "]"}], ",", 
+        RowBox[{
+         SubscriptBox["y", "dart"], "[", "k", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", 
+        SubscriptBox["darts", "questions"]}], "}"}]}], "]"}], ",", 
+    RowBox[{"TableHeadings", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<\>\"", ",", "\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], 
+      "}"}]}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          SubscriptBox["x", "dart"], "[", "k", "]"}], ",", 
+         RowBox[{
+          SubscriptBox["y", "dart"], "[", "k", "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         SubscriptBox["darts", "questions"]}], "}"}]}], "]"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Red", ",", 
+        RowBox[{"PointSize", "[", ".02", "]"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["f", "dart"], "[", "x", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       SubscriptBox["x", 
+        RowBox[{"i", ",", "dart"}]], ",", 
+       SubscriptBox["x", 
+        RowBox[{"f", ",", "dart"}]]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["x", 
+           RowBox[{"i", ",", "dart"}]], ",", 
+          SubscriptBox["x", 
+           RowBox[{"f", ",", "dart"}]]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox["y", 
+           RowBox[{"i", ",", "dart"}]], ",", 
+          SubscriptBox["y", 
+           RowBox[{"f", ",", "dart"}]]}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Black", "}"}]}]}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.755836524440627*^9, 3.755836541284348*^9}, {
+   3.755836575692875*^9, 3.7558365798477716`*^9}, {3.755836699618544*^9, 
+   3.755836700560709*^9}, {3.7558367332776337`*^9, 3.755836808191424*^9}, {
+   3.755836928146715*^9, 3.75583693536264*^9}, {3.755877498224929*^9, 
+   3.755877514221004*^9}, {3.75590582711551*^9, 3.7559058384634743`*^9}, {
+   3.755905870538454*^9, 3.755905872669108*^9}, {3.755905916282881*^9, 
+   3.7559059282185917`*^9}, {3.75590601782448*^9, 3.755906064976927*^9}, 
+   3.755906180880308*^9, {3.755906372375607*^9, 3.7559063737162323`*^9}, {
+   3.755906412552664*^9, 3.7559064384392347`*^9}, {3.755907692086008*^9, 
+   3.755907762319812*^9}, {3.7559078165752897`*^9, 3.755907830746492*^9}, {
+   3.7559601528445*^9, 3.755960173209221*^9}, {3.7561580257181168`*^9, 
+   3.756158048839592*^9}, {3.75639037335841*^9, 3.756390406760968*^9}, {
+   3.756390880427993*^9, 3.756391058824316*^9}, {3.756391122765711*^9, 
+   3.756391152324298*^9}, {3.7563912028281393`*^9, 3.756391206487989*^9}, 
+   3.7563925353293953`*^9, 3.756392690652141*^9, {3.756398441225602*^9, 
+   3.756398442772039*^9}, 
+   3.756398651744351*^9},ExpressionUUID->"929cdcb6-88b9-44f7-970b-\
+6029d604be7a"],
+
+Cell["\<\
+To find the number of darts, we add 1 to the hits variable every time we see \
+a dart under the curve.\
+\>", "Text",
+ CellChangeTimes->{{3.756395855933292*^9, 
+  3.756395909455337*^9}},ExpressionUUID->"882307d0-7116-4e34-b58a-\
+37ca23cdfdf6"],
+
+Cell[BoxData[{
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SubscriptBox["y", "dart"], "[", "k", "]"}], "\[LessSlantEqual]", 
+      RowBox[{
+       SubscriptBox["f", "dart"], "[", 
+       RowBox[{
+        SubscriptBox["x", "dart"], "[", "k", "]"}], "]"}]}], ",", 
+     RowBox[{
+      SubscriptBox["hits", "questions"], "++"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", 
+     SubscriptBox["darts", "questions"]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ SubscriptBox["hits", "questions"]}], "Input",
+ CellChangeTimes->{{3.755837023757599*^9, 3.7558371816305037`*^9}, {
+   3.7558775274325933`*^9, 3.755877532188801*^9}, {3.755906098336607*^9, 
+   3.75590609893353*^9}, {3.755959236326323*^9, 3.755959238216367*^9}, 
+   3.756157958389894*^9, {3.756345436405669*^9, 3.756345438408392*^9}, {
+   3.756390393137735*^9, 3.7563904127127743`*^9}, {3.756392748178616*^9, 
+   3.756392782821885*^9}, {3.7563928242850447`*^9, 
+   3.7563928325021353`*^9}},ExpressionUUID->"a25feb2a-bcc0-49b3-bb37-\
+715fee344726"],
+
+Cell["\<\
+Once again, we will use probability to approximate the integral. The length \
+of the rectangular region is the distance between the two endpoints of the \
+domain. The width of the rectangular region is the distance between the two \
+endpoints of the range.\
+\>", "Text",
+ CellChangeTimes->{{3.75639644866642*^9, 3.756396489306333*^9}, {
+  3.7563965398183613`*^9, 
+  3.75639663246627*^9}},ExpressionUUID->"70c3a540-5561-40cf-8cab-\
+3a40d5b56689"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["area", "dart"], "=", 
+   RowBox[{
+    FractionBox[
+     SubscriptBox["hits", "questions"], 
+     SubscriptBox["darts", "questions"]], "*", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"f", ",", "dart"}]], "-", 
+      SubscriptBox["x", 
+       RowBox[{"i", ",", "dart"}]]}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["y", 
+       RowBox[{"f", ",", "dart"}]], "-", 
+      SubscriptBox["y", 
+       RowBox[{"i", ",", "dart"}]]}], ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["precision", "dart"], "=", "3"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"N", "[", 
+        RowBox[{
+         SubscriptBox["area", "dart"], ",", 
+         SubscriptBox["precision", "dart"]}], "]"}], ",", 
+       SubscriptBox["integral", "dart"]}], "}"}], ",", "1"}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Estimate\>\"", ",", "\"\<\[Integral]\>\""}], "}"}]}], 
+     "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.755864714561467*^9, 3.755864817571012*^9}, {
+  3.75587725406847*^9, 3.755877254273078*^9}, {3.755877541282798*^9, 
+  3.755877544214199*^9}, {3.75595984505903*^9, 3.755959845437381*^9}, {
+  3.756347590453062*^9, 3.756347591322444*^9}, {3.75639290977133*^9, 
+  3.756393007733294*^9}, {3.75639304488698*^9, 3.756393053495234*^9}, {
+  3.756393155185961*^9, 3.7563931554288692`*^9}, {3.756393428070567*^9, 
+  3.756393478337741*^9}},ExpressionUUID->"e2813435-4b1f-4221-ad90-\
+91c824d45f6b"],
+
+Cell["\<\
+Below are the functions that we used earlier. We can try applying the darts \
+method to them.\
+\>", "Text",
+ CellChangeTimes->{{3.756404695052004*^9, 
+  3.756404753530477*^9}},ExpressionUUID->"48a2a8a8-b3f5-4b0f-821b-\
+81e499b9444d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["i", "Subtitle",
+ CellChangeTimes->{
+  3.7563624488148317`*^9},ExpressionUUID->"f4047804-44bc-45e2-91d7-\
+b61817c9f3eb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SuperscriptBox["x", "2"]}]], "Text",
+ CellChangeTimes->{{3.75615578789326*^9, 3.756155799222455*^9}, {
+  3.756164430033893*^9, 3.7561644317722483`*^9}, {3.7562107515763083`*^9, 
+  3.75621075241432*^9}, {3.756362692302565*^9, 
+  3.756362692636586*^9}},ExpressionUUID->"0fbea787-d273-4c13-815a-\
+c7256bc1533e"],
+
+Cell[TextData[{
+ "It looks like we still need over 100000 darts to get a consistent sum \
+accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "829c3cd4-2b58-44c3-9121-5edbaba27442"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{
+  3.7563625322669697`*^9, {3.756362565949751*^9, 3.756362632554862*^9}, {
+   3.756402423575952*^9, 3.7564024265099163`*^9}, {3.756404763136776*^9, 
+   3.7564048046807947`*^9}},ExpressionUUID->"397e7f79-4957-4afc-a5f9-\
+ee55481a5e5f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ii", "Subtitle",
+ CellChangeTimes->{{3.756362458092444*^9, 
+  3.756362458275671*^9}},ExpressionUUID->"fc7a0e64-9c14-4b5a-b697-\
+75d14bf9309b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  SqrtBox["x"]}]], "Text",
+ CellChangeTimes->{{3.7561560190838423`*^9, 3.756156028148933*^9}, {
+  3.756362703192185*^9, 
+  3.756362708592108*^9}},ExpressionUUID->"c2e28f6b-8324-4965-ae69-\
+bcfbd8e5fe49"],
+
+Cell[TextData[{
+ "It also seems that we need over 100000 darts to get a consistent sum \
+accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "4f54f521-b4c1-4eb3-94c8-95a000857522"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.756362777067432*^9, 3.756362802501464*^9}, {
+   3.7563629207296743`*^9, 3.756362927190115*^9}, 3.7564024321237793`*^9, {
+   3.7564050389343576`*^9, 
+   3.756405082510363*^9}},ExpressionUUID->"77f0654f-8a0b-4164-a1fe-\
+6bf6552f2673"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iii", "Subtitle",
+ CellChangeTimes->{{3.7563624646149483`*^9, 
+  3.756362464968017*^9}},ExpressionUUID->"bb395a03-f0b3-4fb1-acca-\
+9f87bcd1427d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SuperscriptBox["x", "2"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.756362647550262*^9, 
+  3.756362647691948*^9}},ExpressionUUID->"32778ddd-2b19-466c-9485-\
+ae32007f8e1d"],
+
+Cell[TextData[{
+ "Again, we need over 100000 darts to get a consistent sum accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "d59c9cf1-83a5-45cd-866e-9cb545375772"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{
+  3.756363009192088*^9, 3.756402435332323*^9, 3.756405041210009*^9, {
+   3.756405330903129*^9, 
+   3.7564053600748377`*^9}},ExpressionUUID->"a19b74c2-efd8-438a-b2db-\
+d5b7612f8664"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["iv", "Subtitle",
+ CellChangeTimes->{{3.756362471549499*^9, 
+  3.756362472227006*^9}},ExpressionUUID->"17deec94-33f4-46b3-8559-\
+883ee2a4c736"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"1", "-", 
+   SqrtBox["x"]}]}]], "Text",
+ CellChangeTimes->{{3.7562109882568417`*^9, 3.756211008178491*^9}, {
+  3.7562362663448133`*^9, 3.756236270444777*^9}, {3.756362649280308*^9, 
+  3.756362649449435*^9}},ExpressionUUID->"d1ca3608-2012-4508-9234-\
+d728753372fb"],
+
+Cell[TextData[{
+ "We need over 100000 darts to get a consistent sum accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "301ecfac-7e9a-405d-b32a-2500093f9b8b"],
+ " decimal place."
+}], "Text",
+ CellChangeTimes->{{3.756362777067432*^9, 3.756362802501464*^9}, {
+   3.7563629207296743`*^9, 3.756362927190115*^9}, 3.7564024376811533`*^9, 
+   3.756405043580512*^9, {3.7564053475165*^9, 
+   3.756405352557353*^9}},ExpressionUUID->"214eecf3-80e5-4035-86bd-\
+e0bac5808d67"],
+
+Cell["\<\
+It turns out that different functions do not change the number of darts \
+needed. Once again, since the darts method is based on random probability, we \
+can never have a consistent estimate. For example, there is a very small (but \
+still greater than 0) chance that all the darts land on a single point, \
+giving us a very inaccurate approximation.\
+\>", "Text",
+ CellChangeTimes->{{3.756405363318336*^9, 3.756405476671133*^9}, {
+  3.756411500496423*^9, 
+  3.7564115388162823`*^9}},ExpressionUUID->"11f1be27-9bb5-4d47-9a6d-\
+aa97d394692a"],
+
+Cell[CellGroupData[{
+
+Cell["3", "Subsubsection",
+ CellChangeTimes->{
+  3.7563982567730417`*^9},ExpressionUUID->"1107e76d-3c3f-427c-b831-\
+cb216f6f2b2d"],
+
+Cell[TextData[{
+ "For this problem, making the rectangles taller does not matter because the \
+ratio between the number of hits to the total number of darts should still be \
+the same as the ratio between the area under the curve to the area of the \
+rectangular region. Thus, the current method would work. The number of darts \
+required would not change. To experiment with this, return to question 2 and \
+set ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["y", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "400bd8e2-fa6d-4965-b81e-81d2cfe1b56a"],
+ "=0 and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["y", "f"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "72009ffe-f541-48e3-a413-27a7d8fb4de7"],
+ "=2 (while keeping ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "i"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "80a4b0f1-63c2-4792-a789-97ef51232a91"],
+ "=0 and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "f"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "485b753e-e454-4fe6-a2c3-e12e497c6bac"],
+ "= ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox[
+    SqrtBox["\[Pi]"], "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "869f10da-b06d-48f0-9fe5-77476d52a70d"],
+ ").\nThe code works for all positive functions. If the function is negative, \
+however, our method would not work (more details in question 4)."
+}], "Text",
+ CellChangeTimes->{{3.756398262896469*^9, 3.756398265321012*^9}, {
+  3.756398325754423*^9, 3.7563983296261683`*^9}, {3.756402782337783*^9, 
+  3.756402803139401*^9}, {3.7564028763254213`*^9, 3.756402913454533*^9}, {
+  3.756403023573792*^9, 3.7564030703634853`*^9}, {3.756403139052999*^9, 
+  3.756403182026425*^9}, {3.7564032181858892`*^9, 3.756403289785335*^9}, {
+  3.7564034203204517`*^9, 
+  3.756403648541697*^9}},ExpressionUUID->"56f62ac8-4316-45fc-bfb9-\
+78341e556a34"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4", "Subsubsection",
+ CellChangeTimes->{
+  3.756399519664721*^9},ExpressionUUID->"45e252c9-f925-4e5c-b2d6-\
+bf2182e3792b"],
+
+Cell["\<\
+With the current code, if the function crosses the x-axis, the estimates will \
+not work. This is because, when we count the number of hits, we see whether \
+the y-value of the dart is less than or equal to the value obtained by \
+plugging the x-value of the dart into the function. We are basically checking \
+if a dart lies under a curve. This method works if the function is always \
+positive within the endpoints. If the function crosses the x-axis and becomes \
+negative, however, things get complicated. For the negative parts of the \
+function, instead of counting under the curve, we need to find the number of \
+darts above the curve because that is the region that the curve encloses. Our \
+code, however, is set to only count the darts below the curve.
+Moreover, if the function crosses the x-axis, even the positive parts are \
+affected. This is because our code counts all the darts beneath the curve, \
+all the way to negative infinity. It is not set to count only the darts \
+between the curve and the x-axis. For the positive functions that we have \
+used in the examples, this problem was not an issue since none of the darts \
+could go beneath the x-axis.
+As an example, let\[CloseCurlyQuote]s use the function f(x)=sin(x).\
+\>", "Text",
+ CellChangeTimes->{{3.756399548919073*^9, 3.756399612031735*^9}, {
+  3.756399667369392*^9, 3.756399718106448*^9}, {3.756399835415097*^9, 
+  3.7563998563900213`*^9}, {3.7563999989885693`*^9, 3.756400158502058*^9}, {
+  3.756400204136787*^9, 3.756400285136842*^9}, {3.7564003734564*^9, 
+  3.756400449646935*^9}, {3.756400495165946*^9, 3.75640079285371*^9}, {
+  3.756400842502026*^9, 
+  3.7564008757328367`*^9}},ExpressionUUID->"14399a0c-bb82-416a-bce8-\
+22e69d3c5c53"],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Sin", "[", "x", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+   RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.756401010085223*^9, 3.756401040562867*^9}, {
+   3.756401199560299*^9, 3.75640124778384*^9}, {3.756401350888699*^9, 
+   3.7564013842000303`*^9}, {3.7564014437852373`*^9, 3.756401552753212*^9}, 
+   3.756401618590412*^9, {3.756401649972993*^9, 
+   3.756401745904283*^9}},ExpressionUUID->"471c692b-27d5-4348-8df5-\
+6282281e2ba0"],
+
+Cell[TextData[{
+ "The code would count darts at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["\[Pi]", "2"], ",", 
+      RowBox[{"-", "0.5"}]}], ")"}], " ", "and", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox[
+       RowBox[{"3", "\[Pi]"}], "2"], ",", 
+      RowBox[{"-", "1.5"}]}], ")"}]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "f1c8e7f0-6220-4db3-9bf4-40a43374e3cf"],
+ " as hits. However, it would not count a dart at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     FractionBox[
+      RowBox[{"3", "\[Pi]"}], "2"], ",", 
+     RowBox[{"-", "0.5"}]}], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e5a34b20-c717-4a81-a231-a79d91d202bc"],
+ " as a hit.\nTo improve our code, we would need to split it into two \
+situations: when the function is negative, and when it is positive. If the \
+function is negative, we would count a hit as a dart located above the curve \
+and below the x-axis. If the function is positive, we would count a hit as a \
+dart located below the curve and above the x-axis."
+}], "Text",
+ CellChangeTimes->{{3.7564010606780376`*^9, 3.7564010826766148`*^9}, {
+  3.7564017977863483`*^9, 
+  3.756402146694551*^9}},ExpressionUUID->"68562b1a-4e3a-4605-9529-\
+60c2f89c3c15"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Part 3", "Section",
+ CellChangeTimes->{{3.7558648823550377`*^9, 
+  3.755864893044911*^9}},ExpressionUUID->"3fabc55d-37dc-49b2-9148-\
+65f7e8357717"],
+
+Cell["\<\
+In this part, we are given a polynomial with which we can use to estimate \
+tan(x).\
+\>", "Text",
+ CellChangeTimes->{{3.756397048096057*^9, 
+  3.7563971370299063`*^9}},ExpressionUUID->"06f5bf7a-4c32-46e9-a0bf-\
+3e5e9aa84fd5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tan", 
+   RowBox[{"(", "x", ")"}]}], "\[TildeTilde]", 
+  RowBox[{"x", "+", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox["x", "3"]}], "+", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox["x", "5"]}], "+", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox["x", "7"]}], "+", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox["x", "9"]}]}]}]], "Text",
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"eb99d97b-b00b-4292-b647-\
+8ed647a53d6f"],
+
+Cell["\<\
+I split the polynomial into its individual terms to make it easier to take \
+out or add terms (which will be necessary in question 1).\
+\>", "Text",
+ CellChangeTimes->{{3.75639733067521*^9, 
+  3.756397380006283*^9}},ExpressionUUID->"5ccccec1-e849-4c05-85d4-\
+c74f764e44a6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], "=", 
+   RowBox[{"Tan", "[", "x", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "1"], "=", "x"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "2"], "=", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox["x", "3"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "3"], "=", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox["x", "5"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "4"], "=", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox["x", "7"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "5"], "=", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox["x", "9"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"polynomial", "[", "x_", "]"}], "=", 
+   RowBox[{
+    SubscriptBox["t", "1"], "+", 
+    SubscriptBox["t", "2"], "+", 
+    SubscriptBox["t", "3"], "+", 
+    SubscriptBox["t", "4"]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.755865365875*^9, 3.755865485914909*^9}, {
+   3.755871158046269*^9, 3.755871183542014*^9}, 3.7558767817769947`*^9, {
+   3.7558768169881287`*^9, 3.755876853497794*^9}, {3.755876886976034*^9, 
+   3.7558770052247763`*^9}, {3.755877076749641*^9, 3.755877098173625*^9}, {
+   3.755877144420273*^9, 3.7558771529199343`*^9}, {3.755877201564825*^9, 
+   3.7558772076792917`*^9}, {3.755877580105359*^9, 3.755877605773061*^9}, {
+   3.755877639437903*^9, 3.755877642637361*^9}, {3.755902288133172*^9, 
+   3.7559023331415653`*^9}, {3.75595940319448*^9, 3.755959407119019*^9}, {
+   3.7560942838832397`*^9, 3.756094424523395*^9}, {3.7560945005375643`*^9, 
+   3.756094542162923*^9}, {3.756094618368857*^9, 3.756094622398972*^9}, {
+   3.7560946573605537`*^9, 3.756094677419767*^9}, {3.756094847352179*^9, 
+   3.756094852234111*^9}, {3.7561578063071632`*^9, 3.756157823325301*^9}, {
+   3.7563521562787848`*^9, 3.7563521585445127`*^9}, {3.75640233052702*^9, 
+   3.756402331300405*^9}, {3.756406070587307*^9, 3.75640613168382*^9}, {
+   3.756406240988023*^9, 3.756406251413875*^9}, {3.756406506469075*^9, 
+   3.756406507654908*^9}},ExpressionUUID->"5c4ea792-1792-4138-81f5-\
+a209a02936b2"],
+
+Cell["\<\
+Below is a table comparing the exact values of tan(x) with the estimates.\
+\>", "Text",
+ CellChangeTimes->{{3.756414481487958*^9, 
+  3.75641454041496*^9}},ExpressionUUID->"e1f2aa6f-7216-4931-9bb4-\
+0ea7800a9ff3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["interval", "3"], "=", "15"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{"x", ",", "3"}], "]"}], ",", 
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{
+         RowBox[{"f", "[", "x", "]"}], ",", "3"}], "]"}], ",", 
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{
+         RowBox[{"polynomial", "[", "x", "]"}], ",", "3"}], "]"}]}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.2", ",", 
+       FractionBox["\[Pi]", "4"], ",", 
+       FractionBox[
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "-", "0.2"}], 
+        SubscriptBox["interval", "3"]]}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<x\>\"", ",", "\"\<tan(x)\>\"", ",", "\"\<Approximation\>\""}], 
+       "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7563521646954403`*^9, 3.756352219787141*^9}, 
+   3.756414568566629*^9},ExpressionUUID->"bea2d4e7-1459-4669-8790-\
+1fd772587296"],
+
+Cell[CellGroupData[{
+
+Cell["Questions", "Subsection",
+ CellChangeTimes->{{3.756094187178821*^9, 
+  3.756094188310525*^9}},ExpressionUUID->"93dd7eb7-6b5f-441a-905a-\
+71dbb8e45ac5"],
+
+Cell[CellGroupData[{
+
+Cell["1", "Subsubsection",
+ CellChangeTimes->{
+  3.7564062031698017`*^9},ExpressionUUID->"65ee9a0f-b5e2-43e2-811b-\
+c7983eaac15d"],
+
+Cell[TextData[{
+ "We do not need all the terms to achieve accuracy to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "96cd0b4d-7524-4c54-b0b3-7d08386e4e62"],
+ " decimal place for most of the approximations. With just the first four \
+terms, the first 12 of 16 total estimates were still accurate. However, using \
+the first three or less terms will lead to many inaccurate solutions. I \
+noticed that, as the number of terms decrease, the approximations become less \
+accurate starting from the greatest value of x, which is ",
+ Cell[BoxData[
+  FractionBox["\[Pi]", "4"]],
+  CellChangeTimes->{{3.7563521646954403`*^9, 3.756352219787141*^9}},
+  ExpressionUUID->"30ab3164-5545-485a-b90d-97ffaeaf5671"],
+ ", meaning that the number of terms necessary changes depending on the value \
+of x. For example, to be accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "202544e4-c10b-45f7-bbaf-84e4db546c9f"],
+ " decimal place, the first four approximations (closer to 0) need just the \
+first two terms of the polynomial. However, the last four approximations \
+(closer to 1) need all five terms to be close to the actual value. In fact, \
+some of the estimates are still a bit off, suggesting that more terms are \
+needed to make them more accurate."
+}], "Text",
+ CellChangeTimes->{{3.756094192013401*^9, 3.756094193484537*^9}, {
+  3.7560945580565968`*^9, 3.756094651153668*^9}, {3.756094689226673*^9, 
+  3.756094719515215*^9}, {3.7560947548243933`*^9, 3.75609484315774*^9}, {
+  3.7564022449832687`*^9, 3.756402307984639*^9}, {3.7564057209688597`*^9, 
+  3.756405728552433*^9}, {3.756405768279567*^9, 3.7564058228044653`*^9}, {
+  3.7564061449688272`*^9, 3.7564061988483877`*^9}, {3.756406286400577*^9, 
+  3.756406404348905*^9}, {3.756406458578614*^9, 3.7564064807904243`*^9}, {
+  3.756406596563148*^9, 3.756406614383317*^9}, {3.7564082226284246`*^9, 
+  3.7564082472593193`*^9}},ExpressionUUID->"b5519b48-a6ba-4f96-a3f0-\
+a9bbb98ca1a8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2", "Subsubsection",
+ CellChangeTimes->{
+  3.7564062065338097`*^9},ExpressionUUID->"eb4ebea4-6a78-4e55-99f8-\
+657a2ea825ce"],
+
+Cell[TextData[{
+ "To find a polynomial approximation of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"tan", "(", 
+    SuperscriptBox["x", "2"], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6258c044-6639-4784-abcd-d742d30ce22f"],
+ ", let\[CloseCurlyQuote]s first define a function equal to tan(x)."
+}], "Text",
+ CellChangeTimes->{{3.756406721427223*^9, 
+  3.756406765903633*^9}},ExpressionUUID->"a1833c90-0839-40e0-a1e0-\
+0c2dc4d95695"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{"tan", 
+   RowBox[{"(", "x", ")"}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"4906644d-a50e-4384-81bf-\
+9275cdb4e10b"]], "Text",
+ CellChangeTimes->{{3.756406808256822*^9, 
+  3.75640685332102*^9}},ExpressionUUID->"ec901272-050f-42dc-a592-\
+677aa44c81e4"],
+
+Cell["Therefore:", "Text",
+ CellChangeTimes->{{3.75640686068264*^9, 
+  3.756406862469082*^9}},ExpressionUUID->"7f45053e-3866-49a2-9c8d-\
+e2d896791bf5"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "\[TildeTilde]", 
+  RowBox[{"x", "+", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox["x", "3"]}], "+", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox["x", "5"]}], "+", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox["x", "7"]}], "+", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox["x", "9"]}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"8b81e237-ab82-429f-9bd0-\
+92fcc3243161"]], "Text",
+ CellChangeTimes->{{3.7564069037522583`*^9, 
+  3.756406912574789*^9}},ExpressionUUID->"1cf4e4fd-5cc4-42cf-8de7-\
+5c041186280d"],
+
+Cell[TextData[{
+ "Now, let\[CloseCurlyQuote]s replace x with ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "9aeddad4-7d51-4d9e-90b3-e50e9abb4be1"],
+ " in the function:"
+}], "Text",
+ CellChangeTimes->{{3.7564069234757338`*^9, 
+  3.756406937842251*^9}},ExpressionUUID->"d103ff2d-9a5b-4a18-abe0-\
+eddaaa242ee9"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", 
+    SuperscriptBox["x", "2"], ")"}]}], "=", 
+  RowBox[{"tan", 
+   RowBox[{"(", 
+    SuperscriptBox["x", "2"], ")"}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"24d44b87-040d-4693-ad9d-\
+a52adeb5af10"]], "Text",
+ CellChangeTimes->{{3.756406971088636*^9, 
+  3.7564070242871923`*^9}},ExpressionUUID->"fd5f75aa-067e-449e-af88-\
+7fd872c3ef64"],
+
+Cell["We can now see that:", "Text",
+ CellChangeTimes->{{3.756407036855049*^9, 
+  3.756407040248378*^9}},ExpressionUUID->"d8e03f91-6a93-49e6-8ae8-\
+498c0ad75bec"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", 
+    SuperscriptBox["x", "2"], ")"}]}], "\[TildeTilde]", 
+  RowBox[{
+   SuperscriptBox["x", "2"], "+", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "3"]}], "+", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "5"]}], "+", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "7"]}], "+", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "9"]}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"bac3c209-28f2-4b84-aa9a-\
+bc6026a60c98"]], "Text",
+ CellChangeTimes->{{3.756407061526587*^9, 
+  3.756407089242055*^9}},ExpressionUUID->"5419bc3c-2469-49f9-9c82-\
+9276aaefc9be"],
+
+Cell["Combining the previous two equations gives us:", "Text",
+ CellChangeTimes->{{3.756407097105*^9, 
+  3.756407121814122*^9}},ExpressionUUID->"68ad4174-2d6c-4671-b730-\
+0e74f4081cc0"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"tan", 
+   RowBox[{"(", 
+    SuperscriptBox["x", "2"], ")"}]}], "\[TildeTilde]", 
+  RowBox[{
+   SuperscriptBox["x", "2"], "+", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "3"]}], "+", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "5"]}], "+", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "7"]}], "+", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "9"]}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"72c70f21-0169-4bd1-97f1-\
+b821a9f5df47"]], "Text",
+ CellChangeTimes->{{3.7564071340163803`*^9, 
+  3.7564071760471354`*^9}},ExpressionUUID->"8c8967e6-6201-46b1-9021-\
+40455ec1d821"],
+
+Cell[TextData[{
+ "We will need more terms because the original equation was only an \
+approximation. By replacing x with ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "466f33fb-a658-465c-ab61-bcee58ba6763"],
+ ", we are making the differences between the approximations and exact values \
+even greater, requiring more terms in the polynomial.\nWe can create a table \
+comparing the two functions within the given domain."
+}], "Text",
+ CellChangeTimes->{{3.756407192707429*^9, 3.7564073212035303`*^9}, {
+  3.7564078220505323`*^9, 3.7564078223637447`*^9}, {3.756408347375249*^9, 
+  3.756408365699856*^9}},ExpressionUUID->"4a08ed80-a365-47ab-95d4-\
+beab0cbcbdaf"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", 
+    RowBox[{"1", ",", "last"}]], "=", 
+   SuperscriptBox["x", "2"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", 
+    RowBox[{"2", ",", "last"}]], "=", 
+   RowBox[{
+    FractionBox["1", "3"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "3"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", 
+    RowBox[{"3", ",", "last"}]], "=", 
+   RowBox[{
+    FractionBox["2", "15"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "5"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", 
+    RowBox[{"4", ",", "last"}]], "=", 
+   RowBox[{
+    FractionBox["17", "315"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "7"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", 
+    RowBox[{"5", ",", "last"}]], "=", 
+   RowBox[{
+    FractionBox["62", "2835"], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "2"], ")"}], "9"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"approximation", "[", "x_", "]"}], "=", 
+   RowBox[{
+    SubscriptBox["t", 
+     RowBox[{"1", ",", "last"}]], "+", 
+    SubscriptBox["t", 
+     RowBox[{"2", ",", "last"}]], "+", 
+    SubscriptBox["t", 
+     RowBox[{"3", ",", "last"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"exact", "[", "x_", "]"}], "=", 
+   RowBox[{"Tan", "[", 
+    SuperscriptBox["x", "2"], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["interval", "last"], "=", "15"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{"x", ",", "3"}], "]"}], ",", 
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{
+         RowBox[{"exact", "[", "x", "]"}], ",", "3"}], "]"}], ",", 
+       RowBox[{"SetPrecision", "[", 
+        RowBox[{
+         RowBox[{"approximation", "[", "x", "]"}], ",", "3"}], "]"}]}], "}"}],
+      ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.2", ",", 
+       FractionBox["\[Pi]", "4"], ",", 
+       FractionBox[
+        RowBox[{
+         FractionBox["\[Pi]", "4"], "-", "0.2"}], 
+        SubscriptBox["interval", "last"]]}], "}"}]}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<x\>\"", ",", "\"\<tan(\!\(\*SuperscriptBox[\(x\), \(2\)]\))\>\"", 
+        ",", "\"\<Approximation\>\""}], "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7564078514408627`*^9, 3.7564079066134167`*^9}, {
+   3.7564079419719276`*^9, 3.75640797808965*^9}, {3.7564080449195747`*^9, 
+   3.756408151883849*^9}, {3.756408297430334*^9, 3.756408308630698*^9}, 
+   3.756409201834394*^9, 
+   3.7564101821172457`*^9},ExpressionUUID->"d0ce9937-38c7-4fd5-a92d-\
+da4521f4d290"],
+
+Cell["\<\
+With all five terms and even with just the first four terms, all the \
+approximations match the exact values. Using the first three terms, the last \
+three estimates are a bit off. Therefore, the smallest polynomial that gets 3 \
+decimal places is:\
+\>", "Text",
+ CellChangeTimes->{{3.756408325654023*^9, 3.756408339437193*^9}, {
+  3.75640837173888*^9, 
+  3.75640851140121*^9}},ExpressionUUID->"59d48408-ebc2-4f8a-96ac-\
+595689883e43"],
+
+Cell[TextData[Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", 
+   RowBox[{"(", "x", ")"}]}], "=", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["x", "2"], "+", 
+    RowBox[{
+     FractionBox["1", "3"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       SuperscriptBox["x", "2"], ")"}], "3"]}], "+", 
+    RowBox[{
+     FractionBox["2", "15"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       SuperscriptBox["x", "2"], ")"}], "5"]}], "+", 
+    RowBox[{
+     FractionBox["17", "315"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       SuperscriptBox["x", "2"], ")"}], "7"]}]}], "=", 
+   RowBox[{
+    SuperscriptBox["x", "2"], "+", 
+    RowBox[{
+     FractionBox["1", "3"], 
+     SuperscriptBox["x", "6"]}], "+", 
+    RowBox[{
+     FractionBox["2", "15"], 
+     SuperscriptBox["x", "10"]}], "+", 
+    RowBox[{
+     FractionBox["17", "315"], 
+     SuperscriptBox["x", "14"]}]}]}]}]],
+ CellChangeTimes->{{3.755865151192021*^9, 3.7558653075975847`*^9}, {
+  3.756352046754963*^9, 
+  3.756352047713162*^9}},ExpressionUUID->"d52e65c4-50d1-4838-9600-\
+c3c2dc97b4d7"]], "Text",
+ CellChangeTimes->{{3.75640855320984*^9, 
+  3.756408647729903*^9}},ExpressionUUID->"25f81341-4565-4c12-9a92-\
+5406f0696d21"],
+
+Cell[TextData[{
+ "Note: It seems that my initial hypothesis that we would need more terms for \
+the same accuracy is incorrect. For the same accuracy, the polynomial \
+approximation for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"tan", "(", 
+    SuperscriptBox["x", "2"], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "7137c8de-fdd8-4801-9315-add5ec2948a5"],
+ " employs less terms than that for tan(x)."
+}], "Text",
+ CellChangeTimes->{{3.756408746391939*^9, 3.7564088139899178`*^9}, {
+  3.756408863070476*^9, 
+  3.756408919705833*^9}},ExpressionUUID->"f392b6f9-b4f0-42f3-81a4-\
+37411f450acc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3", "Subsubsection",
+ CellChangeTimes->{
+  3.756406209549148*^9},ExpressionUUID->"c11c3a98-b4a9-4dcd-bbb6-\
+173a2d0451de"],
+
+Cell["\<\
+We can integrate all the polynomial term \[OpenCurlyDoubleQuote]combinations\
+\[CloseCurlyDoubleQuote] (first term, first two terms, etc.) I created a \
+table to compare all the integral estimates to the actual integral.\
+\>", "Text",
+ CellChangeTimes->{{3.756408972765875*^9, 3.7564090354374228`*^9}, {
+  3.756409183613248*^9, 3.7564092108270817`*^9}, {3.75640932881164*^9, 
+  3.756409363626439*^9}, {3.756409496192871*^9, 
+  3.7564096028630953`*^9}},ExpressionUUID->"dfa5b138-28c1-4e54-a635-\
+973712f3143a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"oneTermIntegral", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       SubscriptBox["t", 
+        RowBox[{"1", ",", "last"}]], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", 
+         FractionBox[
+          SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"twoTermIntegral", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["t", 
+         RowBox[{"1", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"2", ",", "last"}]]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", 
+         FractionBox[
+          SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"threeTermIntegral", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["t", 
+         RowBox[{"1", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"2", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"3", ",", "last"}]]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", 
+         FractionBox[
+          SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fourTermIntegral", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["t", 
+         RowBox[{"1", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"2", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"3", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"4", ",", "last"}]]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", 
+         FractionBox[
+          SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fiveTermIntegral", "=", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["t", 
+         RowBox[{"1", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"2", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"3", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"4", ",", "last"}]], "+", 
+        SubscriptBox["t", 
+         RowBox[{"5", ",", "last"}]]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", 
+         FractionBox[
+          SqrtBox["\[Pi]"], "2"]}], "}"}]}], "]"}], ",", "3"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "integral", ",", "oneTermIntegral", ",", "twoTermIntegral", ",", 
+       "threeTermIntegral", ",", "fourTermIntegral", ",", 
+       "fiveTermIntegral"}], "}"}], ",", "1"}], "]"}], ",", 
+   RowBox[{"TableHeadings", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<\[Integral]\>\"", ",", "\"\<First term\>\"", ",", 
+        "\"\<First two terms\>\"", ",", "\"\<First three terms\>\"", ",", 
+        "\"\<First four terms\>\"", ",", "\"\<First five terms\>\""}], 
+       "}"}]}], "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7564090373916187`*^9, 3.756409052314478*^9}, {
+  3.756409083350585*^9, 3.7564092666286383`*^9}, {3.7564093663512163`*^9, 
+  3.756409491687683*^9}, {3.756409606089531*^9, 3.756409632796543*^9}, {
+  3.7564096643921337`*^9, 
+  3.75640974812291*^9}},ExpressionUUID->"8a3a5141-cca6-49f6-9ae6-\
+9d2b0015d340"],
+
+Cell[TextData[{
+ "It turns out that we need just the first three terms of the polynomial for \
+its integral to be accurate to the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["3", "rd"], TraditionalForm]],ExpressionUUID->
+  "6a896bc4-e80d-4ae7-9173-4d7cae12e0fb"],
+ " decimal place. Increasing the number of terms after 3 terms does not make \
+a significant difference since the approximation is already accurate."
+}], "Text",
+ CellChangeTimes->{{3.756410020437809*^9, 3.756410103016672*^9}, {
+  3.756410194384577*^9, 
+  3.756410286727899*^9}},ExpressionUUID->"efc4e738-fc8d-4cbf-930c-\
+03e06521c8b9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4", "Subsubsection",
+ CellChangeTimes->{
+  3.756406212087249*^9},ExpressionUUID->"bcbf9189-f38d-4ee8-9999-\
+816294c5096e"],
+
+Cell["\<\
+All three methods that I used in this project eventually led me to an \
+accurate approximation of the actual integral. The Riemann Sum method, \
+especially the Trapezoid Riemann Sum, is the most accurate. It is also \
+relatively simple to use. The darts method is the easiest to use because we \
+are just selecting random numbers. However, the estimates of the integral \
+that it gives are often inconsistent and inaccurate. The polynomial method \
+has around the same accuracy as the Riemann Sum method. However, it is more \
+difficult to use since, if we want to add more terms, we would need to \
+calculate them individually. If I had to pick a method to program a computer, \
+I would choose the Riemann Sum method because it balances accuracy and ease \
+of use.\
+\>", "Text",
+ CellChangeTimes->{{3.756410624248487*^9, 3.756411158844179*^9}, {
+  3.756411241287081*^9, 3.756411293172778*^9}, {3.7564113448624163`*^9, 
+  3.75641137078049*^9}},ExpressionUUID->"c569e45a-f58d-4147-8098-\
+eceb7390f51b"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{150, Automatic}, {Automatic, 22}},
+SpellingDictionaries->{"CorrectWords"->{"Zhou"}},
+FrontEndVersion->"11.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 27, \
+2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 323, 8, 73, "Text", "ExpressionUUID" -> \
+"235cb46d-ac0c-45df-90bb-7bd6aec3ba9a"],
+Cell[CellGroupData[{
+Cell[748, 25, 151, 3, 64, "Section", "ExpressionUUID" -> \
+"ad5ff509-5bc2-42fd-9fe9-086ab584109a"],
+Cell[902, 30, 170, 3, 30, "Text", "ExpressionUUID" -> \
+"1220fc4e-2ee4-460c-810a-336c2c0c8a6b"],
+Cell[1075, 35, 372, 11, 57, "Text", "ExpressionUUID" -> \
+"cadeb883-2c90-4bd2-a883-74824ff1ca41"],
+Cell[1450, 48, 278, 4, 30, "Text", "ExpressionUUID" -> \
+"ba7dfd23-90e3-449f-bdc6-465f70453995"],
+Cell[1731, 54, 533, 16, 54, "Input", "ExpressionUUID" -> \
+"39debece-bc53-4834-8cd7-fc8c4ac6b719"],
+Cell[2267, 72, 202, 5, 30, "Text", "ExpressionUUID" -> \
+"873e98d6-eccd-4910-bf4e-32cb8e8fff79"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2506, 82, 151, 3, 64, "Section", "ExpressionUUID" -> \
+"223156c7-041f-4011-8d20-076ad1efa74d"],
+Cell[2660, 87, 1351, 21, 87, "Text", "ExpressionUUID" -> \
+"a94bc694-2d53-4aea-aa34-21a629f1f961"],
+Cell[4014, 110, 404, 12, 58, "Text", "ExpressionUUID" -> \
+"5f34d0a6-a860-401b-80f4-9b7a15eeebb5"],
+Cell[4421, 124, 586, 19, 34, "Text", "ExpressionUUID" -> \
+"bd2227a0-af0e-40cd-b5ec-3b37e4b7c5e7"],
+Cell[5010, 145, 378, 9, 35, "Input", "ExpressionUUID" -> \
+"cf7928f9-6173-42f0-8091-7d54a0d8458a"],
+Cell[5391, 156, 200, 3, 30, "Text", "ExpressionUUID" -> \
+"65ce7f90-53a6-4d55-bbc1-74c96964c080"],
+Cell[5594, 161, 475, 13, 54, "Input", "ExpressionUUID" -> \
+"6bc1bcc3-9289-4e16-9d79-61100a34f1bf"],
+Cell[6072, 176, 713, 12, 49, "Text", "ExpressionUUID" -> \
+"f2ae615f-f403-4c35-b6b3-ed5226859be1"],
+Cell[6788, 190, 622, 19, 58, "Text", "ExpressionUUID" -> \
+"d55afdb1-3d99-4051-accd-1fa45ab5cc76"],
+Cell[7413, 211, 320, 9, 54, "Input", "ExpressionUUID" -> \
+"a42260f4-4405-41fa-9c4e-b09f73df9ea6"],
+Cell[7736, 222, 1717, 49, 53, "Text", "ExpressionUUID" -> \
+"87aa7cd6-54db-4d59-b05a-9fed62e2bfe7"],
+Cell[9456, 273, 601, 20, 53, "Text", "ExpressionUUID" -> \
+"d3facb9f-e7ca-49ce-b89b-d41967c1ab6d"],
+Cell[10060, 295, 332, 11, 54, "Input", "ExpressionUUID" -> \
+"ebecdbe6-d328-43df-9161-9aa3c2196c35"],
+Cell[10395, 308, 518, 16, 32, "Text", "ExpressionUUID" -> \
+"20991c57-712b-46da-8bea-5add9babe89c"],
+Cell[10916, 326, 226, 6, 35, "Input", "ExpressionUUID" -> \
+"6894863b-f7d8-4fcf-a317-c7bdc404a303"],
+Cell[11145, 334, 223, 5, 30, "Text", "ExpressionUUID" -> \
+"a4ef833b-85a3-43e8-b40e-0cf5725b76a4"],
+Cell[11371, 341, 1159, 24, 58, "Input", "ExpressionUUID" -> \
+"965c0228-5481-40bf-9dfa-b01da97254e3"],
+Cell[12533, 367, 793, 13, 68, "Text", "ExpressionUUID" -> \
+"41e7430e-5a2a-4acd-9458-1ca39ad0f412"],
+Cell[13329, 382, 2987, 61, 120, "Input", "ExpressionUUID" -> \
+"3406fd7a-0de4-4793-afb4-45bf800ad085"],
+Cell[CellGroupData[{
+Cell[16341, 447, 157, 3, 44, "Subsection", "ExpressionUUID" -> \
+"cc1418a7-ea91-4a54-901e-b301df26ce66"],
+Cell[CellGroupData[{
+Cell[16523, 454, 668, 10, 35, "Subsubsection", "ExpressionUUID" -> \
+"76ce2405-5698-4929-9a85-5edc8784b9f0"],
+Cell[17194, 466, 1749, 29, 50, "Text", "ExpressionUUID" -> \
+"1a70fdb0-8a09-4324-8f96-a3dbd3ddd23d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18980, 500, 154, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"65bf84e9-94fc-486d-b9ec-52ce2e407f17"],
+Cell[19137, 505, 625, 11, 49, "Text", "ExpressionUUID" -> \
+"0111083e-74b4-4982-a46f-d4afa08f6c85"],
+Cell[19765, 518, 293, 4, 30, "Text", "ExpressionUUID" -> \
+"41a6bf29-4bdb-486a-ab1a-4df03b8d826c"],
+Cell[20061, 524, 816, 17, 32, "Input", "ExpressionUUID" -> \
+"6d538c67-867b-4f45-bc61-c5d3f2fc3ad5"],
+Cell[20880, 543, 288, 7, 30, "Text", "ExpressionUUID" -> \
+"adb6a83b-b80a-4f80-94c3-df29536d0c1b"],
+Cell[21171, 552, 479, 13, 58, "Input", "ExpressionUUID" -> \
+"0f77cfab-ccfa-47b0-861a-8cfafc1f4ef8"],
+Cell[21653, 567, 243, 4, 30, "Text", "ExpressionUUID" -> \
+"66dfe787-6e05-4174-a3c7-64f062733752"],
+Cell[21899, 573, 1201, 32, 59, "Input", "ExpressionUUID" -> \
+"80134571-eca6-4331-88f2-52988a4ba31f"],
+Cell[23103, 607, 266, 4, 30, "Text", "ExpressionUUID" -> \
+"7013d241-6cbd-4c6d-8d15-9d032af63e86"],
+Cell[23372, 613, 430, 12, 48, "Input", "ExpressionUUID" -> \
+"56860381-92de-49f7-a186-49b81375be33"],
+Cell[23805, 627, 398, 12, 32, "Text", "ExpressionUUID" -> \
+"b11f272e-b063-4de8-932c-9c40095ea656"],
+Cell[24206, 641, 427, 12, 35, "Input", "ExpressionUUID" -> \
+"560943e1-82e7-47de-9bba-fcc0c8789910"],
+Cell[24636, 655, 652, 19, 32, "Text", "ExpressionUUID" -> \
+"659c533e-16e4-4c0b-802f-a7b284947fb7"],
+Cell[25291, 676, 305, 8, 35, "Input", "ExpressionUUID" -> \
+"6aac1f47-a536-4653-abda-486784a5d8d0"],
+Cell[25599, 686, 150, 3, 30, "Text", "ExpressionUUID" -> \
+"9cb18f72-278d-46d0-9a9d-87fe3403f97b"],
+Cell[25752, 691, 582, 17, 58, "Input", "ExpressionUUID" -> \
+"da880524-0d4b-4c4c-8d7f-d62cf7970b39"],
+Cell[26337, 710, 257, 7, 30, "Text", "ExpressionUUID" -> \
+"f8eaa1a1-aedd-4e83-a750-78ca6d3a3783"],
+Cell[26597, 719, 1808, 49, 153, "Input", "ExpressionUUID" -> \
+"4da8cbb6-7eb3-496c-925e-ac687cb725f5"],
+Cell[28408, 770, 611, 19, 32, "Text", "ExpressionUUID" -> \
+"6fd758ec-3a05-40ab-87a4-09c99d113e44"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29080, 796, 198, 4, 51, "Subtitle", "ExpressionUUID" -> \
+"5e7ac1fd-fac6-4af6-836c-6b43f7fe3be7"],
+Cell[29281, 802, 388, 9, 33, "Text", "ExpressionUUID" -> \
+"5f3bffcb-7fd4-4bf8-8f7f-e3caa2232f71"],
+Cell[29672, 813, 686, 14, 31, "Text", "ExpressionUUID" -> \
+"3bc90489-4c33-44f8-b765-1663e1d74061"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30395, 832, 197, 4, 51, "Subtitle", "ExpressionUUID" -> \
+"54a70e04-2e76-4194-9996-0785f742b8a3"],
+Cell[30595, 838, 283, 8, 33, "Text", "ExpressionUUID" -> \
+"ef9a1ac2-700b-4f8a-ab90-15693f1a01a7"],
+Cell[30881, 848, 614, 14, 31, "Text", "ExpressionUUID" -> \
+"c5771531-c197-40bb-982d-2fb01b598a8f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31532, 867, 321, 5, 51, "Subtitle", "ExpressionUUID" -> \
+"905c9ba0-a91b-4895-bce2-201038e75ec6"],
+Cell[31856, 874, 315, 9, 33, "Text", "ExpressionUUID" -> \
+"b53782d6-2267-44a5-9280-3ebf534e4aff"],
+Cell[32174, 885, 613, 13, 31, "Text", "ExpressionUUID" -> \
+"7ba076ce-4cbc-4295-9997-470d94a4e749"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32824, 903, 151, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"e2c8b823-dfea-497a-ad44-99b00a280692"],
+Cell[32978, 908, 351, 9, 33, "Text", "ExpressionUUID" -> \
+"a41cb36c-2aad-4274-a4d6-ae99c911ab61"],
+Cell[33332, 919, 659, 15, 31, "Text", "ExpressionUUID" -> \
+"6bf95e69-9b20-4d8d-9b09-b8d3f143879d"],
+Cell[33994, 936, 922, 15, 68, "Text", "ExpressionUUID" -> \
+"0a1091d8-eb92-47ac-ae87-d27308175934"],
+Cell[CellGroupData[{
+Cell[34941, 955, 125, 2, 35, "Subsubsection", "ExpressionUUID" -> \
+"b4fb71a3-4722-4f76-b010-94b1f6f93444"],
+Cell[35069, 959, 450, 8, 49, "Text", "ExpressionUUID" -> \
+"45692810-00fa-43ef-88df-06547e031b87"],
+Cell[35522, 969, 828, 24, 60, "Text", "ExpressionUUID" -> \
+"28aa1147-3bbb-48ad-b2b8-04b0610a2e12"],
+Cell[36353, 995, 442, 8, 49, "Text", "ExpressionUUID" -> \
+"f62b4628-c1c0-4fc9-97ed-e6e27135a392"],
+Cell[36798, 1005, 1085, 31, 59, "Input", "ExpressionUUID" -> \
+"3aaf0fd9-cbdf-4fc3-9151-016dfdba2e37"],
+Cell[37886, 1038, 270, 6, 30, "Text", "ExpressionUUID" -> \
+"dcb6c711-1615-4ae1-ae77-c37785c47890"],
+Cell[38159, 1046, 2047, 55, 144, "Input", "ExpressionUUID" -> \
+"f135b68e-c4c6-48f6-94e3-6b7b5d307536"],
+Cell[40209, 1103, 262, 6, 30, "Text", "ExpressionUUID" -> \
+"7070b868-c094-443b-a1b9-5b47692e1b73"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40520, 1115, 125, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"7b8c06b0-718e-4240-8799-9e3df0b7acba"],
+Cell[40648, 1120, 386, 9, 33, "Text", "ExpressionUUID" -> \
+"2fe99301-b827-4491-a39b-8e7960b784e1"],
+Cell[41037, 1131, 498, 13, 31, "Text", "ExpressionUUID" -> \
+"1c422f3c-6293-4f16-95de-1cf489fd6545"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41572, 1149, 148, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"76f4d53a-565d-4b95-9cb8-00901be76261"],
+Cell[41723, 1154, 279, 8, 33, "Text", "ExpressionUUID" -> \
+"70bd4be3-5cc6-480b-8e64-b2a9ae5042de"],
+Cell[42005, 1164, 495, 12, 31, "Text", "ExpressionUUID" -> \
+"0067633c-2db8-4f39-9cd1-6a96f519a6f3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42537, 1181, 151, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"d86969a5-1246-477d-9e0e-a838b42f008a"],
+Cell[42691, 1186, 315, 9, 33, "Text", "ExpressionUUID" -> \
+"980fc1f9-b01f-4407-a2f1-c178b48a569b"],
+Cell[43009, 1197, 416, 11, 31, "Text", "ExpressionUUID" -> \
+"1f18acec-ca32-4956-b12a-aa6dbb353328"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43462, 1213, 148, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"4894de5f-fb53-4c1b-bcd8-0472977cfa42"],
+Cell[43613, 1218, 351, 9, 33, "Text", "ExpressionUUID" -> \
+"cdc057b0-81e1-4267-a270-61e7bb54ba77"],
+Cell[43967, 1229, 495, 12, 31, "Text", "ExpressionUUID" -> \
+"87f827e9-64df-4991-9485-697714bddc58"],
+Cell[44465, 1243, 669, 11, 49, "Text", "ExpressionUUID" -> \
+"f77967c7-9de3-407c-a421-b7f668e0dc09"],
+Cell[CellGroupData[{
+Cell[45159, 1258, 150, 3, 64, "Section", "ExpressionUUID" -> \
+"8a8c6fca-3904-4e4e-8b48-1fe1be59a1e7"],
+Cell[45312, 1263, 1044, 20, 72, "Text", "ExpressionUUID" -> \
+"96841372-f56a-4281-83f2-6ab5dcdb84ab"],
+Cell[46359, 1285, 1183, 19, 54, "Input", "ExpressionUUID" -> \
+"54b43ad8-d4fd-40b3-a8eb-40cc23fe11d8"],
+Cell[47545, 1306, 1280, 35, 85, "Text", "ExpressionUUID" -> \
+"421defa0-df62-4a66-af75-e5bf8300a742"],
+Cell[48828, 1343, 475, 13, 54, "Input", "ExpressionUUID" -> \
+"75a1b38f-f2c9-4854-baeb-d2129c949bcb"],
+Cell[49306, 1358, 740, 13, 49, "Text", "ExpressionUUID" -> \
+"532a83b9-f3f0-43d6-a8d5-894342a9ce46"],
+Cell[50049, 1373, 3191, 85, 120, "Input", "ExpressionUUID" -> \
+"52ce704b-6a85-4eab-aca4-f18df29914d3"],
+Cell[53243, 1460, 635, 11, 49, "Text", "ExpressionUUID" -> \
+"7cc56baf-0486-4ea9-974f-1b80a01f4a29"],
+Cell[53881, 1473, 884, 22, 56, "Input", "ExpressionUUID" -> \
+"f9193000-0326-4a12-9216-218e8efaa8b0"],
+Cell[54768, 1497, 639, 11, 68, "Text", "ExpressionUUID" -> \
+"8e2c7d01-6ec0-43f8-8619-1e1ab4f76979"],
+Cell[55410, 1510, 1246, 33, 102, "Input", "ExpressionUUID" -> \
+"da4042fb-2da8-4263-a2bd-4e33abab3ec2"],
+Cell[CellGroupData[{
+Cell[56681, 1547, 157, 3, 44, "Subsection", "ExpressionUUID" -> \
+"e52ea43b-1e94-4076-98de-7fb5adf93fd1"],
+Cell[CellGroupData[{
+Cell[56863, 1554, 154, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"732aa2a2-7f12-4b97-912c-4bbc147adb11"],
+Cell[57020, 1559, 1072, 19, 50, "Text", "ExpressionUUID" -> \
+"ee660bcd-466d-42df-b243-44eee82fa397"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58129, 1583, 128, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"60c75bba-4b29-459e-8038-987d7a1c834f"],
+Cell[58260, 1588, 423, 8, 30, "Text", "ExpressionUUID" -> \
+"8681b943-2c70-42fb-ad53-e94fe5f1ecd7"],
+Cell[58686, 1598, 363, 9, 34, "Input", "ExpressionUUID" -> \
+"03ea217d-c452-4518-aaee-114ec3e12773"],
+Cell[59052, 1609, 191, 3, 30, "Text", "ExpressionUUID" -> \
+"c5af2d2d-7754-497b-ba1b-97c5e5517946"],
+Cell[59246, 1614, 783, 16, 58, "Input", "ExpressionUUID" -> \
+"a783efb5-7cf5-4e26-9a45-35fdf246c3c7"],
+Cell[60032, 1632, 1270, 33, 32, "Text", "ExpressionUUID" -> \
+"90c8257e-f7e1-4533-8b55-2c2a254b78bd"],
+Cell[61305, 1667, 1170, 32, 104, "Input", "ExpressionUUID" -> \
+"9a82510b-6762-4e8a-abf0-0c27fe946f2d"],
+Cell[62478, 1701, 533, 10, 30, "Text", "ExpressionUUID" -> \
+"bb920c79-e7e4-4169-bef0-4951701d2376"],
+Cell[63014, 1713, 1935, 51, 58, "Input", "ExpressionUUID" -> \
+"41e852fe-e0ea-4cb6-9a24-ca3ab3041187"],
+Cell[64952, 1766, 522, 9, 49, "Text", "ExpressionUUID" -> \
+"5da569fe-39ee-4d48-82a8-b2a4baba02f5"],
+Cell[65477, 1777, 4347, 116, 104, "Input", "ExpressionUUID" -> \
+"929cdcb6-88b9-44f7-970b-6029d604be7a"],
+Cell[69827, 1895, 252, 6, 30, "Text", "ExpressionUUID" -> \
+"882307d0-7116-4e34-b58a-37ca23cdfdf6"],
+Cell[70082, 1903, 1083, 26, 58, "Input", "ExpressionUUID" -> \
+"a25feb2a-bcc0-49b3-bb37-715fee344726"],
+Cell[71168, 1931, 455, 9, 49, "Text", "ExpressionUUID" -> \
+"70c3a540-5561-40cf-8cab-3a40d5b56689"],
+Cell[71626, 1942, 1731, 48, 103, "Input", "ExpressionUUID" -> \
+"e2813435-4b1f-4221-ad90-91c824d45f6b"],
+Cell[73360, 1992, 243, 6, 30, "Text", "ExpressionUUID" -> \
+"48a2a8a8-b3f5-4b0f-821b-81e499b9444d"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73676, 2006, 125, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"f4047804-44bc-45e2-91d7-b61817c9f3eb"],
+Cell[73804, 2011, 386, 9, 33, "Text", "ExpressionUUID" -> \
+"0fbea787-d273-4c13-815a-c7256bc1533e"],
+Cell[74193, 2022, 527, 13, 31, "Text", "ExpressionUUID" -> \
+"397e7f79-4957-4afc-a5f9-ee55481a5e5f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74757, 2040, 148, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"fc7a0e64-9c14-4b5a-b697-75d14bf9309b"],
+Cell[74908, 2045, 279, 8, 33, "Text", "ExpressionUUID" -> \
+"c2e28f6b-8324-4965-ae69-bcfbd8e5fe49"],
+Cell[75190, 2055, 527, 13, 31, "Text", "ExpressionUUID" -> \
+"77f0654f-8a0b-4164-a1fe-6bf6552f2673"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75754, 2073, 151, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"bb395a03-f0b3-4fb1-acca-9f87bcd1427d"],
+Cell[75908, 2078, 315, 9, 33, "Text", "ExpressionUUID" -> \
+"32778ddd-2b19-466c-9485-ae32007f8e1d"],
+Cell[76226, 2089, 460, 12, 31, "Text", "ExpressionUUID" -> \
+"a19b74c2-efd8-438a-b2db-d5b7612f8664"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76723, 2106, 148, 3, 51, "Subtitle", "ExpressionUUID" -> \
+"17deec94-33f4-46b3-8559-883ee2a4c736"],
+Cell[76874, 2111, 351, 9, 33, "Text", "ExpressionUUID" -> \
+"d1ca3608-2012-4508-9234-d728753372fb"],
+Cell[77228, 2122, 524, 12, 31, "Text", "ExpressionUUID" -> \
+"214eecf3-80e5-4035-86bd-e0bac5808d67"],
+Cell[77755, 2136, 551, 10, 49, "Text", "ExpressionUUID" -> \
+"11f1be27-9bb5-4d47-9a6d-aa97d394692a"],
+Cell[CellGroupData[{
+Cell[78331, 2150, 130, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"1107e76d-3c3f-427c-b831-cb216f6f2b2d"],
+Cell[78464, 2155, 1937, 47, 103, "Text", "ExpressionUUID" -> \
+"56f62ac8-4316-45fc-bfb9-78341e556a34"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[80438, 2207, 128, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"45e252c9-f925-4e5c-b2d6-bf2182e3792b"],
+Cell[80569, 2212, 1731, 26, 163, "Text", "ExpressionUUID" -> \
+"14399a0c-bb82-416a-bce8-22e69d3c5c53"],
+Cell[82303, 2240, 599, 13, 32, "Input", "ExpressionUUID" -> \
+"471c692b-27d5-4348-8df5-6282281e2ba0"],
+Cell[82905, 2255, 1326, 35, 78, "Text", "ExpressionUUID" -> \
+"68562b1a-4e3a-4605-9529-60c2f89c3c15"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84268, 2295, 153, 3, 64, "Section", "ExpressionUUID" -> \
+"3fabc55d-37dc-49b2-9148-65f7e8357717"],
+Cell[84424, 2300, 235, 6, 30, "Text", "ExpressionUUID" -> \
+"06f5bf7a-4c32-46e9-a0bf-3e5e9aa84fd5"],
+Cell[84662, 2308, 614, 20, 49, "Text", "ExpressionUUID" -> \
+"eb99d97b-b00b-4292-b647-8ed647a53d6f"],
+Cell[85279, 2330, 283, 6, 30, "Text", "ExpressionUUID" -> \
+"5ccccec1-e849-4c05-85d4-c74f764e44a6"],
+Cell[85565, 2338, 2301, 56, 235, "Input", "ExpressionUUID" -> \
+"5c4ea792-1792-4138-81f5-a209a02936b2"],
+Cell[87869, 2396, 222, 5, 30, "Text", "ExpressionUUID" -> \
+"e1f2aa6f-7216-4931-9bb4-0ea7800a9ff3"],
+Cell[88094, 2403, 1209, 35, 109, "Input", "ExpressionUUID" -> \
+"bea2d4e7-1459-4669-8790-1fd772587296"],
+Cell[CellGroupData[{
+Cell[89328, 2442, 157, 3, 44, "Subsection", "ExpressionUUID" -> \
+"93dd7eb7-6b5f-441a-905a-71dbb8e45ac5"],
+Cell[CellGroupData[{
+Cell[89510, 2449, 130, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"65ee9a0f-b5e2-43e2-811b-c7983eaac15d"],
+Cell[89643, 2454, 2038, 36, 114, "Text", "ExpressionUUID" -> \
+"b5519b48-a6ba-4f96-a3f0-a9bbb98ca1a8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[91718, 2495, 130, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"eb4ebea4-6a78-4e55-99f8-657a2ea825ce"],
+Cell[91851, 2500, 463, 12, 34, "Text", "ExpressionUUID" -> \
+"a1833c90-0839-40e0-a1e0-0c2dc4d95695"],
+Cell[92317, 2514, 452, 12, 33, "Text", "ExpressionUUID" -> \
+"ec901272-050f-42dc-a592-677aa44c81e4"],
+Cell[92772, 2528, 151, 3, 30, "Text", "ExpressionUUID" -> \
+"7f45053e-3866-49a2-9c8d-e2d896791bf5"],
+Cell[92926, 2533, 756, 23, 37, "Text", "ExpressionUUID" -> \
+"1cf4e4fd-5cc4-42cf-8de7-5c041186280d"],
+Cell[93685, 2558, 390, 11, 31, "Text", "ExpressionUUID" -> \
+"d103ff2d-9a5b-4a18-abe0-eddaaa242ee9"],
+Cell[94078, 2571, 507, 14, 35, "Text", "ExpressionUUID" -> \
+"fd5f75aa-067e-449e-af88-7fd872c3ef64"],
+Cell[94588, 2587, 162, 3, 30, "Text", "ExpressionUUID" -> \
+"d8e03f91-6a93-49e6-8ae8-498c0ad75bec"],
+Cell[94753, 2592, 1021, 33, 38, "Text", "ExpressionUUID" -> \
+"5419bc3c-2469-49f9-9c82-9276aaefc9be"],
+Cell[95777, 2627, 185, 3, 30, "Text", "ExpressionUUID" -> \
+"68ad4174-2d6c-4671-b730-0e74f4081cc0"],
+Cell[95965, 2632, 1027, 33, 38, "Text", "ExpressionUUID" -> \
+"8c8967e6-6201-46b1-9021-40455ec1d821"],
+Cell[96995, 2667, 741, 15, 69, "Text", "ExpressionUUID" -> \
+"4a08ed80-a365-47ab-95d4-beab0cbcbdaf"],
+Cell[97739, 2684, 3018, 95, 338, "Input", "ExpressionUUID" -> \
+"d0ce9937-38c7-4fd5-a92d-da4521f4d290"],
+Cell[100760, 2781, 445, 9, 49, "Text", "ExpressionUUID" -> \
+"59d48408-ebc2-4f8a-96ac-595689883e43"],
+Cell[101208, 2792, 1175, 39, 38, "Text", "ExpressionUUID" -> \
+"25f81341-4565-4c12-9a92-5406f0696d21"],
+Cell[102386, 2833, 620, 15, 53, "Text", "ExpressionUUID" -> \
+"f392b6f9-b4f0-42f3-81a4-37411f450acc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[103043, 2853, 128, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"c11c3a98-b4a9-4dcd-bbb6-173a2d0451de"],
+Cell[103174, 2858, 519, 9, 30, "Text", "ExpressionUUID" -> \
+"dfa5b138-28c1-4e54-a635-973712f3143a"],
+Cell[103696, 2869, 3729, 113, 282, "Input", "ExpressionUUID" -> \
+"8a3a5141-cca6-49f6-9ae6-9d2b0015d340"],
+Cell[107428, 2984, 603, 13, 50, "Text", "ExpressionUUID" -> \
+"efc4e738-fc8d-4cbf-930c-03e06521c8b9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[108068, 3002, 128, 3, 35, "Subsubsection", "ExpressionUUID" -> \
+"bcbf9189-f38d-4ee8-9999-816294c5096e"],
+Cell[108199, 3007, 1011, 16, 106, "Text", "ExpressionUUID" -> \
+"c569e45a-f58d-4147-8098-eceb7390f51b"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
